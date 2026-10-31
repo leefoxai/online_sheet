@@ -1,0 +1,1772 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>꿈채움 AI 캠프 활동지</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: one worksheet column under a sticky deep-green tool bar. Each 교시 is a tab of activity cards in slide order;
+   직접 하기 cards (연습 · 만들기) are tinted light green like the slides, 활동지 칸 are framed boxes with a dark label strip,
+   and orange is reserved for the parts a student replaces with their own words. */
+:root{
+  --bg:#F5F9F6; --surface:#FFFFFF; --do:#EEF5F0; --do-line:#CFE3D7; --mint:#E1EFE9; --mint-ink:#0F502F; --input:#FFFFFF;
+  --ink:#13271C; --muted:#526B5D; --line:#D6E5DB; --line-strong:#6FA88A;
+  --head:#092D1B; --deep:#0F502F; --green:#007C46; --btn:#007C46; --btn-ink:#FFFFFF;
+  --orange:#E97132; --orange-ink:#A9480F; --slot-bg:#FDE8D9; --slot-row:#FFF6EF; --warn-bg:#FDF1E8;
+  --focus:#E97132; --shadow:0 1px 2px rgba(9,45,27,.05),0 6px 18px rgba(9,45,27,.05);
+  --f-display:"Black Han Sans","Gothic A1","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+  --f-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B1510; --surface:#111F17; --do:#13271C; --do-line:#24402F; --mint:#1A3527; --mint-ink:#A6E3C2; --input:#0D1913;
+    --ink:#E3EFE7; --muted:#9AB5A6; --line:#24392C; --line-strong:#3F7A5A;
+    --head:#06180E; --deep:#145C37; --green:#5BD49A; --btn:#1D8A54; --btn-ink:#FFFFFF;
+    --orange:#F08A50; --orange-ink:#F6A876; --slot-bg:#3A2316; --slot-row:#22180F; --warn-bg:#2A1C12;
+    --focus:#F08A50; --shadow:none; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B1510; --surface:#111F17; --do:#13271C; --do-line:#24402F; --mint:#1A3527; --mint-ink:#A6E3C2; --input:#0D1913;
+  --ink:#E3EFE7; --muted:#9AB5A6; --line:#24392C; --line-strong:#3F7A5A;
+  --head:#06180E; --deep:#145C37; --green:#5BD49A; --btn:#1D8A54; --btn-ink:#FFFFFF;
+  --orange:#F08A50; --orange-ink:#F6A876; --slot-bg:#3A2316; --slot-row:#22180F; --warn-bg:#2A1C12;
+  --focus:#F08A50; --shadow:none; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--f-body);word-break:keep-all;overflow-wrap:anywhere}
+button{font:inherit;color:inherit}
+a{color:var(--green)}
+b,strong{font-weight:700}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- top bar ---------- */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--head)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--head);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.14)}
+.top-in{max-width:1240px;margin:0 auto;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
+.brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.brand-k{font:400 21px/1.1 var(--f-display);letter-spacing:.01em}
+.brand-t{font-size:12.5px;color:rgba(255,255,255,.72)}
+.who{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.who-chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:5px 12px;font-size:14px;font-weight:700;cursor:pointer;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.who-chip.empty{background:var(--orange);border-color:var(--orange)}
+.saved{font-size:12.5px;color:rgba(255,255,255,.72)}
+.saved.bad{color:#FFC9A8;font-weight:700}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-left:auto;align-items:center}
+.tools-l{font-size:12.5px;color:rgba(255,255,255,.72);margin-right:2px}
+@media (max-width:1280px){.tools-l{display:none}}
+.tool{display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border-radius:999px;background:#fff;color:#092D1B;text-decoration:none;font-weight:700;font-size:15.5px;border:0;line-height:1.2;cursor:pointer}
+.tool svg{width:17px;height:17px;flex:none}
+.tool:hover{background:#E1EFE9}
+.tool.off{background:rgba(255,255,255,.14);color:rgba(255,255,255,.8);cursor:help}
+@media (max-width:640px){.top{position:static}.tools{margin-left:0}}
+
+/* ---------- page ---------- */
+.wrap{max-width:1000px;margin:0 auto;padding-block:16px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.restore{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--warn-bg);border:1.5px solid var(--orange);border-radius:14px;padding:12px 16px;margin-bottom:12px}
+.restore p{margin:0;flex:1 1 300px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:6px 0 4px}
+.tab{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;cursor:pointer;text-align:left;min-width:0}
+.tab .tn{font:400 32px/1 var(--f-display);color:var(--green);flex:none}
+.tab .tt{min-width:0;display:flex;flex-direction:column}
+.tab .tt b{font-size:16px;line-height:1.25}
+.tab .tt small{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tab .tc{margin-left:auto;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--mint);color:var(--mint-ink);white-space:nowrap;flex:none}
+.tab .tc.ok{background:var(--btn);color:#fff}
+.tab[aria-selected="true"]{background:var(--deep);border-color:var(--deep);color:#fff}
+.tab[aria-selected="true"] .tn{color:#fff}
+.tab[aria-selected="true"] .tt small{color:rgba(255,255,255,.78)}
+.tab[aria-selected="true"] .tc{background:rgba(255,255,255,.16);color:#fff}
+.tab[aria-selected="true"] .tc.ok{background:#fff;color:var(--deep)}
+@media (max-width:760px){.tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.tab .tc{display:none}}
+
+/* panel header */
+.ph{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 18px;align-items:center;padding:22px 0 18px}
+.ph-n{font:400 84px/.85 var(--f-display);color:var(--green);align-self:center}
+.ph h2{font:700 27px/1.25 var(--f-body);margin:0;text-wrap:balance}
+.ph .make{margin:2px 0 0;color:var(--muted);font-size:15.5px}
+.ph-meta{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px}
+@media (max-width:760px){.ph-meta{grid-template-columns:minmax(0,1fr)}.ph-n{font-size:64px}}
+.box-l{font-size:12.5px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin:0 0 6px}
+.techs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.tech{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;padding:3px 10px 3px 4px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--surface)}
+.tech i{font-style:normal;font-weight:700;font-size:12px;width:21px;height:21px;border-radius:50%;display:grid;place-items:center;background:var(--bg);color:var(--muted)}
+.tech.got{background:var(--mint);border-color:transparent;color:var(--mint-ink)}
+.tech.got i{background:var(--surface);color:var(--green)}
+.tech.now{background:var(--deep);border-color:var(--deep);color:#fff;font-weight:700}
+.tech.now i{background:#fff;color:var(--deep)}
+.leave{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.leave li{display:flex;align-items:center;gap:10px;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:7px 10px 7px 12px;font-size:14.5px}
+.need{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--bg);color:var(--muted);white-space:nowrap;flex:none}
+.need.ok{background:var(--btn);color:#fff}
+.method{margin:0;font-size:14.5px;color:var(--mint-ink);background:var(--mint);border-radius:10px;padding:8px 12px}
+.method b{color:var(--mint-ink)}
+
+/* cards */
+.stack{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:14px;min-width:0;box-shadow:var(--shadow);scroll-margin-top:96px}
+.card.do{background:var(--do);border-color:var(--do-line)}
+@media (max-width:520px){.card{padding:16px 14px;border-radius:14px}}
+.card-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.card h3{margin:2px 0 0;font-size:20.5px;line-height:1.35;text-wrap:balance;flex-basis:100%}
+.badge{font-size:13px;font-weight:700;padding:3px 11px;border-radius:999px;line-height:1.5}
+.badge.do{background:var(--deep);color:#fff}
+.badge.follow{border:1.5px solid var(--deep);color:var(--deep);background:var(--surface)}
+:root[data-theme="dark"] .badge.follow{color:var(--green);border-color:var(--green)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .badge.follow{color:var(--green);border-color:var(--green)}}
+.badge.see{background:var(--mint);color:var(--mint-ink)}
+.tag{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:6px;background:var(--surface);border:1px solid var(--line-strong);color:var(--green)}
+.sub{margin:0 0 6px;font-weight:700;font-size:15.5px}
+.lead{margin:0}
+p{margin:0}
+.note{font-size:14.5px;color:var(--muted)}
+.tip{background:var(--mint);border-radius:12px;padding:10px 14px;font-size:15.5px}
+.warn{background:var(--warn-bg);border:1px solid var(--orange);border-radius:12px;padding:10px 14px;font-size:15.5px}
+.warn b{color:var(--orange-ink)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.grid3{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card:not(.do) .mini{background:var(--bg)}
+.mini b{font-size:15.5px}
+.mini p,.mini li{font-size:15px}
+.mini ul{margin:0;padding-left:18px}
+ul.plain{margin:0;padding-left:20px;display:grid;gap:2px}
+
+/* numbered steps (real sequences) */
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:9px;counter-reset:s}
+ol.steps>li{counter-increment:s;display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start}
+ol.steps>li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--deep);color:#fff;font-weight:700;display:grid;place-items:center;font-size:14px;margin-top:1px}
+ol.steps>li>span small{display:block;font-size:14px;color:var(--muted)}
+
+/* form */
+.field{display:grid;gap:6px;min-width:0}
+.field>span,.flabel{font-weight:700;font-size:15px}
+input[type="text"],input[type="number"],textarea,select{width:100%;font:inherit;font-size:16.5px;color:var(--ink);background:var(--input);border:1.5px solid var(--line-strong);border-radius:10px;padding:9px 12px;min-width:0}
+textarea{min-height:84px;resize:vertical;line-height:1.55}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.85}
+input:focus,textarea:focus,select:focus{outline:3px solid var(--focus);outline-offset:1px;border-color:var(--orange)}
+.idrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr) minmax(0,1.6fr);gap:12px}
+@media (max-width:560px){.idrow{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.idrow .field:last-child{grid-column:1/-1}}
+.unit{display:flex;align-items:center;gap:6px;font-weight:500}
+.unit input{text-align:center}
+.unit span{white-space:nowrap}
+.checks{display:flex;flex-wrap:wrap;gap:8px}
+.checks.col{flex-direction:column;align-items:stretch}
+.ck{display:inline-flex;align-items:center;gap:9px;padding:7px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;font-size:15.5px;line-height:1.4}
+.ck input{width:20px;height:20px;margin:0;accent-color:var(--btn);flex:none}
+.ck:has(input:checked){border-color:var(--btn);background:var(--mint)}
+.ck small{color:var(--muted);font-size:13.5px}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px}
+.seg label{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1.5px solid var(--line-strong);border-radius:999px;background:var(--surface);cursor:pointer;font-weight:700}
+.seg input{accent-color:var(--btn);width:18px;height:18px;margin:0}
+.seg label:has(input:checked){background:var(--deep);border-color:var(--deep);color:#fff}
+
+/* 활동지 칸 */
+.kan{border:2px solid var(--deep);border-radius:14px;background:var(--surface);overflow:hidden}
+.kan-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;background:var(--deep);color:#fff;padding:8px 14px;font-weight:700;font-size:16px}
+.kan-n{font:400 17px/1 var(--f-display);background:#fff;color:#0F502F;padding:5px 9px 4px;border-radius:7px;letter-spacing:.02em}
+.kan-h .need{margin-left:auto;background:rgba(255,255,255,.16);color:#fff}
+.kan-h .need.ok{background:#fff;color:#0F502F}
+.kan-b{padding:16px;display:grid;gap:14px}
+.arrow2{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:end}
+.arrow2 .ar{font-weight:700;color:var(--green);padding-bottom:10px;font-size:20px}
+@media (max-width:560px){.arrow2{grid-template-columns:minmax(0,1fr)}.arrow2 .ar{display:none}}
+.example{font-size:14.5px;color:var(--muted);background:var(--bg);border-radius:10px;padding:8px 12px}
+.example b{color:var(--ink)}
+
+/* prompt box (looks like the 제미나이 입력창 on the slides) */
+.prompt{border:1.5px solid var(--line-strong);border-radius:16px;background:var(--surface);overflow:hidden;min-width:0}
+.prompt-h{display:flex;align-items:center;gap:10px;padding:7px 8px 7px 14px;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.prompt-h .where{display:flex;align-items:center;gap:7px;font-weight:700;min-width:0}
+.prompt-h .where svg{width:15px;height:15px;color:var(--green);flex:none}
+.prompt-t{padding:13px 16px 14px;font-size:17.5px;line-height:1.7;white-space:pre-wrap}
+.slot{background:var(--slot-bg);color:var(--orange-ink);font-weight:700;border-radius:5px;padding:1px 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.slot-block{display:block;padding:8px 10px;margin-top:2px;font-weight:500;max-height:220px;overflow:auto}
+.slot-block.empty{font-weight:700}
+.slots{display:flex;flex-wrap:wrap;gap:8px 12px;padding:10px 14px 12px;background:var(--slot-row);border-top:1px dashed var(--orange)}
+.slots-l{font-size:13px;font-weight:700;color:var(--orange-ink);flex-basis:100%}
+.slots label{display:grid;gap:3px;font-size:13px;font-weight:700;color:var(--muted);flex:1 1 210px;min-width:0}
+.slots input{border-color:var(--orange);font-size:15.5px;padding:7px 10px}
+.copy,.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;background:var(--btn);color:var(--btn-ink);font-weight:700;font-size:15px;padding:8px 18px;cursor:pointer;white-space:nowrap;line-height:1.3;text-decoration:none}
+.copy{margin-left:auto}
+.copy:hover,.btn:hover{filter:brightness(1.08)}
+.copy.done,.btn.done{background:var(--deep)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line-strong)}
+.btn.warnb{background:var(--orange);color:#fff}
+.btn.sm{font-size:13.5px;padding:5px 12px}
+
+/* copy / insert chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:15px;padding:6px 8px 6px 13px;border-radius:999px;border:1.5px solid var(--line-strong);background:var(--surface);cursor:pointer;display:inline-flex;gap:8px;align-items:center;text-align:left;line-height:1.35}
+.chip::after{content:"복사";font-size:11.5px;font-weight:700;color:#fff;background:var(--btn);border-radius:999px;padding:1px 7px;flex:none}
+.chip.ins::after{content:"넣기";background:var(--deep)}
+.chip.done::after{content:"복사됨";background:var(--deep)}
+.chip.ins.done::after{content:"넣었어요"}
+.chip.file{font-family:var(--f-body);font-weight:700}
+.phr{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:8px 14px;align-items:center}
+.phr>span{font-size:14.5px;color:var(--muted)}
+@media (max-width:560px){.phr{grid-template-columns:minmax(0,1fr)}.phr>span{margin-top:6px}}
+
+details.more{border:1.5px dashed var(--line-strong);border-radius:12px;padding:0 14px;background:var(--surface)}
+details.more>summary{cursor:pointer;font-weight:700;padding:10px 0;color:var(--green);list-style:none}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>summary::before{content:"＋ "}
+details.more[open]>summary::before{content:"－ "}
+details.more[open]{padding-bottom:14px}
+details.more>div{display:grid;gap:12px}
+
+/* 테마 cards */
+.themes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:860px){.themes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.themes{grid-template-columns:minmax(0,1fr)}}
+.theme{position:relative;border:2px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--surface);cursor:pointer;display:flex;flex-direction:column;gap:8px;min-width:0}
+.theme input{position:absolute;opacity:0;pointer-events:none}
+.theme:has(input:checked){border-color:var(--btn);box-shadow:0 0 0 3px var(--mint)}
+.theme:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:2px}
+.theme .tname{display:flex;align-items:center;justify-content:space-between;gap:8px;font-weight:700;font-size:17px}
+.theme .tname em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:0 7px}
+.theme:has(input:checked) .tname em{background:var(--btn);color:#fff;border-color:var(--btn)}
+.theme dl{margin:0;display:grid;gap:4px}
+.theme dt{color:var(--muted);font-size:12px;font-weight:700}
+.theme dd{margin:0 0 2px;font-size:14px;line-height:1.45}
+
+/* 후렴 시간 */
+.time{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.time .tset{display:flex;align-items:center;gap:6px;font-weight:700}
+.time input{width:64px;text-align:center;padding:8px 6px}
+.result{font-weight:700;font-size:17px;color:var(--green)}
+.result.empty{color:var(--muted);font-weight:500;font-size:15px}
+
+/* tries */
+.tries{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.tries-l{font-weight:700;font-size:15px}
+.dots{display:inline-flex;gap:5px}
+.dots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--btn);background:var(--surface)}
+.dots i.on{background:var(--btn)}
+.tries-s{font-size:14.5px;color:var(--muted)}
+.tries.out .tries-s{color:var(--orange-ink);font-weight:700}
+
+/* timeline (편집 진행) */
+.tl{display:grid;gap:6px;overflow-x:auto}
+.tl-row{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;align-items:stretch;min-width:480px}
+.tl-l{font-size:13px;font-weight:700;color:var(--muted);align-self:center}
+.tl-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.tl-track.one{grid-template-columns:minmax(0,1fr)}
+.tl-track span{font-size:13px;padding:5px 8px;border-radius:7px;background:var(--mint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mint-ink);font-weight:500}
+.tl-track.song span{background:var(--deep);color:#fff}
+.tl-track.pic span{background:var(--surface);border:1.5px solid var(--line-strong);color:var(--ink)}
+.tl-track.sub span{background:var(--slot-bg);color:var(--orange-ink)}
+.tl-axis{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted);padding-left:60px;min-width:480px}
+
+/* edit steps */
+.esteps{display:grid;gap:10px}
+.estep{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:10px}
+.estep-h{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.estep-h b{font-size:17px}
+.estep .ck{margin-left:auto}
+.lines{display:grid;gap:6px}
+.lines .chip{justify-content:space-between}
+
+/* charter */
+.charter{display:grid;gap:12px}
+.crow{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.crow .ch-h{font-weight:700;font-size:17px;color:var(--green);padding-top:6px}
+.crow .ch-b{display:grid;gap:8px;min-width:0}
+.own{font-size:12.5px;font-weight:700;color:var(--muted)}
+.own.ok{color:var(--green)}
+@media (max-width:600px){.crow{grid-template-columns:minmax(0,1fr)}.crow .ch-h{padding-top:0}}
+
+/* journey sentence */
+.frame{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:17px;line-height:2}
+.frame input{width:auto;flex:1 1 220px;max-width:100%}
+.sentence{background:var(--slot-row);border:1.5px solid var(--orange);border-radius:12px;padding:12px 14px;font-size:17px}
+.sentence.empty{color:var(--muted);font-size:15px;border-style:dashed}
+.hist{display:grid;gap:8px}
+.hist .h{background:var(--bg);border-radius:10px;padding:8px 12px;font-size:14.5px}
+.hist .h b{display:block;font-size:13px;color:var(--muted)}
+
+.who-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:560px){.who-grid{grid-template-columns:minmax(0,1fr)}}
+.who-col{border-radius:12px;padding:12px 14px;display:grid;gap:6px;align-content:start}
+.who-col.me{background:var(--mint)}
+.who-col.ai{background:var(--bg);border:1px solid var(--line)}
+.who-col b.h{font-size:16px}
+.who-col ul{margin:0;padding-left:18px;font-size:15px}
+.tbl-wrap{overflow-x:auto}
+table.tbl{border-collapse:collapse;width:100%;font-size:14.5px;min-width:380px}
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+.tbl th{font-size:13px;color:var(--muted)}
+.tbl tr.me td{background:var(--mint);font-weight:700}
+.cards7{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:600px){.cards7{grid-template-columns:minmax(0,1fr)}}
+.card7{background:var(--bg);border-radius:10px;padding:10px 12px;font-size:15px}
+.card7 b{display:block;font-size:12.5px;color:var(--green)}
+
+.panel-foot{margin-top:18px;display:grid;gap:8px}
+.teacher{margin-top:40px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);padding:0 16px}
+.teacher>summary{cursor:pointer;padding:12px 0;font-weight:700;color:var(--muted);font-size:14.5px}
+.teacher[open]{padding-bottom:16px}
+.teacher .tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:620px){.teacher .tgrid{grid-template-columns:minmax(0,1fr)}}
+.teacher .wide{grid-column:1/-1}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--head);color:#fff;padding:10px 18px;border-radius:999px;font-weight:700;font-size:15px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:40;max-width:calc(100% - 32px);text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+</style>
+<!--BODY-->
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <span class="brand-k">꿈채움 AI 캠프 활동지</span>
+      <span class="brand-t">생성형 AI 활용 숏폼 제작 · 동북중학교 3학년</span>
+    </div>
+    <div class="who">
+      <button type="button" class="who-chip" id="whoChip" data-goto="c-name"><span data-show="whoLine"></span></button>
+      <span class="saved" id="saved" aria-live="polite"></span>
+    </div>
+    <nav class="tools" aria-label="도구 링크 모음">
+      <span class="tools-l">도구 링크</span>
+      <a class="tool" data-link="gemini" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c.6 5.3 4.7 9.4 10 10-5.3.6-9.4 4.7-10 10-.6-5.3-4.7-9.4-10-10 5.3-.6 9.4-4.7 10-10z"/></svg>제미나이</a>
+      <a class="tool" data-link="folder" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2 2.2h8.4A1.5 1.5 0 0 1 21 8.7v9.8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/></svg><span data-show="folderName">공유 폴더</span></a>
+      <a class="tool" data-link="suno" data-song="suno" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 17.5V5.8l11-2.3v11.9a2.6 2.6 0 1 1-1.8-2.5V7.2L10.8 8.8v8.7a2.6 2.6 0 1 1-1.8-2.4z"/></svg>Suno</a>
+      <a class="tool" data-link="canva" data-edit="canva" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M10 9.2v5.6l4.6-2.8z"/></svg>Canva</a>
+      <a class="tool" data-link="cutter" data-edit="cutter" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6.5" cy="7" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6.5" cy="17" r="2.6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.6 8.6 20 18M8.6 15.4 20 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>비디오 커터</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="restore" id="restore" hidden>
+    <p><b>이 크롬북에 저장된 활동지가 있어요.</b> <span id="restoreWho"></span></p>
+    <div class="row">
+      <button type="button" class="btn" id="keepBtn">내 것이 맞아요 · 이어서 쓰기</button>
+      <button type="button" class="btn ghost" id="newBtn">새로 시작하기</button>
+    </div>
+  </div>
+
+  <nav class="tabs" role="tablist" aria-label="교시">
+    <button type="button" class="tab" role="tab" id="tab-p1" aria-controls="p1" data-tab="p1"><span class="tn">1</span><span class="tt"><b>1교시</b><small>아티스트 정하기</small></span><span class="tc" data-count="p1"></span></button>
+    <button type="button" class="tab" role="tab" id="tab-p2" aria-controls="p2" data-tab="p2"><span class="tn">2</span><span class="tt"><b>2교시</b><small>노래 · 첫 그림</small></span><span class="tc" data-count="p2"></span></button>
+    <button type="button" class="tab" role="tab" id="tab-p3" aria-controls="p3" data-tab="p3"><span class="tn">3</span><span class="tt"><b>3교시</b><small>그림 4장 · 편집</small></span><span class="tc" data-count="p3"></span></button>
+    <button type="button" class="tab" role="tab" id="tab-p4" aria-controls="p4" data-tab="p4"><span class="tn">4</span><span class="tt"><b>4교시</b><small>완성 · 헌장</small></span><span class="tc" data-count="p4"></span></button>
+  </nav>
+
+  <!-- ================= 1교시 ================= -->
+  <section class="panel" id="p1" role="tabpanel" aria-labelledby="tab-p1">
+    <header class="ph">
+      <span class="ph-n" aria-hidden="true">1</span>
+      <div><h2>프롬프트 공식과 콘텐츠 기획</h2><p class="make">만드는 것 · 아티스트 이름 · 곡 주제</p></div>
+      <div class="ph-meta">
+        <div><p class="box-l">기법 지도 · 오늘은 1~3</p><ul class="techs" data-techs="1"></ul></div>
+        <div><p class="box-l">오늘 남길 것</p>
+          <ul class="leave">
+            <li>1번 칸 · 처음 → 고친 프롬프트<span class="need" data-need="p1.first p1.fixed"></span></li>
+            <li>2번 칸 · 아티스트 이름 · 곡 주제<span class="need" data-need="p1.artist p1.topic"></span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="stack">
+      <article class="card" id="c-name">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>반 · 번호 · 이름부터 써요</h3></div>
+        <div class="idrow">
+          <label class="field"><span>반</span><span class="unit"><span>3학년</span><input type="text" id="id-ban" data-k="id.ban" inputmode="numeric" maxlength="2" autocomplete="off"><span>반</span></span></label>
+          <label class="field"><span>번호</span><span class="unit"><input type="text" id="id-no" data-k="id.no" inputmode="numeric" maxlength="2" autocomplete="off"><span>번</span></span></label>
+          <label class="field"><span>이름</span><input type="text" id="id-name" data-k="id.name" autocomplete="off"></label>
+        </div>
+        <p class="note">이 활동지 탭은 4교시 내내 닫지 않아요. 오늘 쓰는 도구는 전부 맨 위 <b>도구 링크</b>로 들어가요. 1번 칸은 조금 뒤, 2번 칸은 마지막에 채워요. 쓴 내용은 이 크롬북 브라우저에 저장돼요.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기</span><h3>AI 쓰기 전에 세 가지 약속</h3></div>
+        <div class="grid2">
+          <ol class="steps">
+            <li><span><b>누르기 전에 생각하기</b><small>무엇을 원하는지 먼저 정해요</small></span></li>
+            <li><span><b>결과 의심해 보기</b><small>그럴듯해도 틀릴 수 있어요</small></span></li>
+            <li><span><b>아무렇게나 다시 누르지 않기</b><small>무료 횟수가 정해져 있어요</small></span></li>
+          </ol>
+          <div class="mini">
+            <b>AI 사용 규칙 · 프롬프트에 넣지 않아요</b>
+            <ul><li>실제 가수 · 게임 · 캐릭터 이름</li><li>친구 · 선생님 이름</li><li>놀리는 말 · 욕설</li></ul>
+            <p class="note">나오면 지우고 다시 해요. 이유는 4교시에 함께 이야기해요.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">연습 1 · 3분</span><h3>같은 걸 물었는데, 검색과 AI는 뭐가 다를까?</h3></div>
+        <ol class="steps">
+          <li><span>맨 위 <b>제미나이</b> 링크를 눌러 새 탭으로 열어요<small>오른쪽 위 동그라미가 학교 계정인지 확인 · 안내 창이 뜨면 '시작하기'</small></span></li>
+          <li><span>아래 문장을 복사해 제미나이 입력창에 붙여넣어요</span></li>
+          <li><span>내 화면의 일정표와 선생님 화면의 검색 결과를 비교하고, 다른 점 하나를 손 들고 말해요</span></li>
+        </ol>
+        <div class="prompt" data-p="trip"></div>
+        <p class="tip"><b>검색은 단어, AI는 문장.</b> 검색은 찾아 주고, AI는 만들어 줘요.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기</span><span class="tag">기법 1</span><h3>세 칸 채우기</h3></div>
+        <div class="grid3">
+          <div class="mini"><b>무엇을</b><p>무엇에 대한 것인지 · 시키는 말 꼭</p><p class="note">예) 시험 끝난 날 … 써 줘</p></div>
+          <div class="mini"><b>+ 어떤 느낌으로</b><p>장르 · 분위기 · 그림 스타일 · 내 상황</p><p class="note">예) 신나는 국악 힙합</p></div>
+          <div class="mini"><b>+ 조건</b><p>길이 · 화면 · 넣지 말 것</p><p class="note">예) 4줄만, 가수 이름 빼고</p></div>
+        </div>
+        <p class="note">다 안 채워도 되지만, 빈 칸은 AI가 아무거나로 채워요. 좋은 프롬프트는 길이가 아니라 필요한 것을 명확하게 썼는지로 판단해요.</p>
+      </article>
+
+      <article class="card do" id="c-p1k1">
+        <div class="card-h"><span class="badge do">연습 2 · 5분 · 활동지 1번 칸</span><h3>내 프롬프트를 직접 쓰고, 판정하고, 고치기</h3></div>
+        <div class="grid3">
+          <div class="mini"><b>① 공식대로 쓰기</b><p>새 채팅을 열고 무엇을 + 어떤 느낌으로 + 조건. 주제는 내 이야기로 (막히면 체육대회)</p></div>
+          <div class="mini"><b>② 결과 판정</b><ul><li>내 이야기인가? → 무엇을</li><li>원하는 분위기인가? → 어떤 느낌으로</li><li>길이 · 형식이 맞나? → 조건</li></ul></div>
+          <div class="mini"><b>③ 부족한 칸만 다시</b><p>새로 쓰지 말고 같은 대화창에서 그 칸만 더해서 다시 말해요</p></div>
+        </div>
+        <div class="prompt" data-p="lunch"></div>
+        <div>
+          <p class="sub">③ 부족한 칸만 다시 말할 때</p>
+          <div class="phr">
+            <span>내 이야기가 아니면</span><div><button type="button" class="chip" data-copy="급식 이야기로 다시 써 줘">급식 이야기로 다시 써 줘</button></div>
+            <span>분위기가 아니면</span><div><button type="button" class="chip" data-copy="신나는 랩 느낌으로 다시 써 줘">신나는 랩 느낌으로 다시 써 줘</button></div>
+            <span>길이가 아니면</span><div><button type="button" class="chip" data-copy="4줄로 줄여 줘">4줄로 줄여 줘</button></div>
+          </div>
+        </div>
+        <p class="warn"><b>한 번에 한 칸만 고쳐요.</b> 그래야 무엇 때문에 달라졌는지 알 수 있어요.</p>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">1번 칸</span>프롬프트 일지<span class="need" data-need="p1.first p1.fixed"></span></div>
+          <div class="kan-b">
+            <label class="field"><span>처음 프롬프트</span><textarea id="p1-first" data-k="p1.first" rows="2" placeholder="제미나이에 처음 넣은 문장을 붙여넣어요"></textarea></label>
+            <div class="field"><span class="flabel">고친 칸</span>
+              <div class="checks">
+                <label class="ck"><input type="checkbox" data-k="p1.fx.what">무엇을</label>
+                <label class="ck"><input type="checkbox" data-k="p1.fx.feel">어떤 느낌으로</label>
+                <label class="ck"><input type="checkbox" data-k="p1.fx.cond">조건</label>
+              </div>
+            </div>
+            <label class="field"><span>고친 프롬프트</span><textarea id="p1-fixed" data-k="p1.fixed" rows="2" placeholder="칸을 더해서 다시 넣은 문장을 붙여넣어요"></textarea></label>
+            <div class="field"><span class="flabel">결과</span>
+              <div class="checks">
+                <label class="ck"><input type="checkbox" data-k="p1.rs.story">내 이야기가 됐다</label>
+                <label class="ck"><input type="checkbox" data-k="p1.rs.mood">분위기가 생겼다</label>
+                <label class="ck"><input type="checkbox" data-k="p1.rs.len">길이가 맞았다</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">연습 3 · 2분</span><span class="tag">기법 2</span><h3>모르면 모른다고 하게 하기</h3></div>
+        <p class="lead">2023년에 유명해진 AI 답이에요. 세종대왕이 맥북을 던졌대요. 지금 제미나이에 똑같이 물어보세요.</p>
+        <div class="prompt" data-p="sejong"></div>
+        <div class="field"><span class="flabel">답에서 세 곳 찾기</span>
+          <div class="checks">
+            <label class="ck"><input type="checkbox" data-k="p1.sj1">① 옛 답을 인용해요</label>
+            <label class="ck"><input type="checkbox" data-k="p1.sj2">② 왜 틀렸는지 설명해요</label>
+            <label class="ck"><input type="checkbox" data-k="p1.sj3">③ 출처가 붙어 있어요</label>
+          </div>
+        </div>
+        <div class="grid2">
+          <div class="mini"><b>왜 생길까?</b><p>AI는 정답을 찾는 게 아니라, 다음에 올 그럴듯한 말을 이어 붙여요. 그래서 말이 안 되는 질문에도 "없다"고 하기보다 그럴듯한 이야기를 지어내요.</p></div>
+          <div class="mini"><b>확인하는 법</b><ul><li>출처가 붙었나 보기</li><li>믿을 만한 곳 2곳에서 검색</li><li>다르면 쓰지 않기</li><li>조건 칸에 아래 한 줄 넣기</li></ul></div>
+        </div>
+        <div class="chips"><button type="button" class="chip" data-copy="확실하지 않으면 모른다고 말해 줘">확실하지 않으면 모른다고 말해 줘</button></div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기</span><span class="tag">기법 3</span><h3>꼬리 질문 · 답을 보고 같은 대화창에서 이어서 묻기</h3></div>
+        <p class="lead">연습 2에서 부족한 칸만 더해서 다시 물은 것도 꼬리 질문이었어요. 같은 대화창에서 물어야 AI가 앞 내용을 기억해요.</p>
+        <div class="phr">
+          <span>고른 것을 이어 가기</span><div><p>"3번으로 할게, ~해 줘"</p></div>
+          <span>느낌만 바꾸기</span><div class="chips"><button type="button" class="chip" data-copy="더 짧게">더 짧게</button><button type="button" class="chip" data-copy="더 신나게">더 신나게</button></div>
+          <span>마음에 드는 게 없을 때</span><div class="chips"><button type="button" class="chip" data-copy="다른 느낌으로 5개 더">다른 느낌으로 5개 더</button></div>
+          <span>두 개를 합치기</span><div class="chips"><button type="button" class="chip" data-copy="2번과 4번을 섞어 줘">2번과 4번을 섞어 줘</button></div>
+          <span>AI 생각 확인하기</span><div class="chips"><button type="button" class="chip" data-copy="왜 그렇게 정했어?">왜 그렇게 정했어?</button></div>
+          <span>기법 2도 이어 묻기로</span><div class="chips"><button type="button" class="chip" data-copy="확실하지 않으면 모른다고 해 줘">확실하지 않으면 모른다고 해 줘</button></div>
+        </div>
+      </article>
+
+      <article class="card" id="c-theme">
+        <div class="card-h"><span class="badge see">같이 보기</span><h3>어떤 숏폼을 만들까? 테마 하나 고르기</h3></div>
+        <p class="lead">테마를 고르면 노래 느낌과 그림 스타일이 정해져요. 공식의 '어떤 느낌으로' 칸이 돼요.</p>
+        <div class="themes" role="radiogroup" aria-label="테마">
+          <label class="theme"><input type="radio" name="theme" data-k="p1.theme" value="joseon"><span class="tname">조선 힙합<em>선생님 예시</em></span>
+            <dl><dt>노래 느낌</dt><dd>국악 힙합, 가야금, 떼창 후렴</dd><dt>그림 스타일</dt><dd>민화풍, 한지 질감, 단청 색감</dd><dt>장면 예시</dt><dd>호랑이 등장 · 시험지 부채 · 궁궐 떼창</dd></dl></label>
+          <label class="theme"><input type="radio" name="theme" data-k="p1.theme" value="game"><span class="tname">게임 음악</span>
+            <dl><dt>노래 느낌</dt><dd>보스전 배경음악, 8비트 칩튠</dd><dt>그림 스타일</dt><dd>16비트 픽셀 아트, 레트로 화면</dd><dt>장면 예시</dt><dd>던전 입구 · 시험지 몬스터 · 레벨 업</dd></dl></label>
+          <label class="theme"><input type="radio" name="theme" data-k="p1.theme" value="anime"><span class="tname">애니 음악</span>
+            <dl><dt>노래 느낌</dt><dd>애니 오프닝풍 록, 벅찬 후렴</dd><dt>그림 스타일</dt><dd>셀 애니메이션, 선명한 외곽선</dd><dt>장면 예시</dt><dd>노을 운동장 · 하이파이브 · 하늘 날기</dd></dl></label>
+          <label class="theme"><input type="radio" name="theme" data-k="p1.theme" value="free"><span class="tname">자율 테마<em>원하는 사람만</em></span>
+            <dl><dt>노래 느낌</dt><dd>장르 + 악기 + 분위기를 한 줄로</dd><dt>그림 스타일</dt><dd>그림 스타일 + 색감을 한 줄로</dd><dt>장면 예시</dt><dd>시작 · 사건 · 신나는 순간 · 마지막</dd></dl></label>
+        </div>
+        <label class="field" id="freeWrap" hidden><span>내 테마의 노래 느낌 (장르 + 악기 + 분위기)</span><input type="text" id="p1-themeFree" data-k="p1.themeFree" placeholder="예) 시티팝, 신시사이저, 여름밤 분위기"></label>
+        <p class="note"><b>이름 대신 특징으로 말하기.</b> 실제 게임 · 애니 제목은 쓰지 않고 분위기로 말해요 (예: '보스전 느낌'). 이유는 4교시에.</p>
+      </article>
+
+      <article class="card do" id="c-p1k2">
+        <div class="card-h"><span class="badge do">만들기 1 · 5분 · 활동지 2번 칸</span><span class="tag">기법 3</span><h3>꼬리 질문으로 나의 아티스트 정하기</h3></div>
+        <ol class="steps">
+          <li><span>공식으로 곡 주제 5개 부탁하기<small>먼저 내 말로, 막히면 아래 예시 (주황 글자만 내 것으로)</small></span></li>
+          <li><span>곡 주제 5개 중 마음에 드는 번호 고르기</span></li>
+          <li><span>꼬리 질문으로 아티스트 이름 5개 받고 하나 고르기</span></li>
+          <li><span>아래 2번 칸에 테마 · 아티스트 이름 · 곡 주제 쓰기</span></li>
+        </ol>
+        <div class="prompt" data-p="artist1"></div>
+        <div class="prompt" data-p="artist2"></div>
+        <div class="chips"><span class="note">마음에 드는 게 없으면</span><button type="button" class="chip" data-copy="다른 느낌으로 5개 더">다른 느낌으로 5개 더</button><button type="button" class="chip" data-copy="영어 한 단어로 5개">영어 한 단어로 5개</button></div>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">2번 칸</span>나의 아티스트<span class="need" data-need="p1.artist p1.topic"></span></div>
+          <div class="kan-b">
+            <div class="grid3">
+              <div class="field"><span class="flabel">테마</span><p class="result" data-show="themeName" data-empty="위에서 테마를 골라요"></p></div>
+              <label class="field"><span>아티스트 이름</span><input type="text" id="p1-artist" data-k="p1.artist" placeholder="예) 호랑이" autocomplete="off"></label>
+              <label class="field"><span>곡 주제</span><input type="text" id="p1-topic" data-k="p1.topic" placeholder="예) 시험 끝난 날" autocomplete="off"></label>
+            </div>
+            <p class="example">선생님 예시 · <b>조선 힙합</b> · 곡 주제 <b>시험 끝난 날</b> · 아티스트 이름 <b>호랑이</b></p>
+          </div>
+        </div>
+        <p class="warn"><b>아티스트 이름에 친구 · 선생님 이름, 놀리는 말은 안 돼요</b> (AI 사용 규칙). 이 대화창은 2교시에 다시 쓰니까 닫지 마세요. 장면은 2교시에 노래를 듣고 정해요.</p>
+      </article>
+    </div>
+    <div class="panel-foot">
+      <p class="method"><b>모든 기법에 똑같이</b> · 쓰고 → 판정하고 → 필요한 부분만 수정 요청하기</p>
+      <p class="note">쉬는 시간 전에 · 활동지 탭과 제미나이 대화창은 닫지 않기 · 크롬북은 덮지 않기 · ID 카드 받은 사람은 책상 위에 그대로</p>
+    </div>
+  </section>
+
+  <!-- ================= 2교시 ================= -->
+  <section class="panel" id="p2" role="tabpanel" aria-labelledby="tab-p2" hidden>
+    <header class="ph">
+      <span class="ph-n" aria-hidden="true">2</span>
+      <div><h2>AI로 가사 · 음악 · 이미지 만들기</h2><p class="make">만드는 것 · 노래 1곡 + 첫 그림 1장</p></div>
+      <div class="ph-meta">
+        <div><p class="box-l">기법 지도 · 오늘은 4~6</p><ul class="techs" data-techs="2"></ul></div>
+        <div><p class="box-l">오늘 남길 것</p>
+          <ul class="leave">
+            <li>1번 칸 · 고친 가사 한 줄<span class="need" data-need="p2.before p2.after"></span></li>
+            <li>2번 칸 · 후렴 시간<span class="need" data-need="@chorus"></span></li>
+            <li>공유 폴더 · 노래 파일 + 장면1.png<span class="need" data-need="p2.upSong p2.upImg"></span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="stack">
+      <article class="card">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>지금 꺼내 둘 것</h3></div>
+        <ol class="steps">
+          <li><span>제미나이 왼쪽 최근 대화에서 <b>1교시 대화</b>를 열어요<small>오늘은 그 대화에서 가사를 만들어요</small></span></li>
+          <li><span>1교시 2번 칸을 확인해요</span></li>
+        </ol>
+        <div class="grid3">
+          <div class="mini"><b>테마</b><p data-show="themeName" data-empty="아직 안 골랐어요"></p></div>
+          <div class="mini"><b>아티스트 이름</b><p data-show="artist" data-empty="아직 비어 있어요"></p></div>
+          <div class="mini"><b>곡 주제</b><p data-show="topic" data-empty="아직 비어 있어요"></p></div>
+        </div>
+        <p class="note">비어 있으면 <button type="button" class="btn ghost sm" data-goto="c-p1k2">1교시 2번 칸으로</button> 가서 채우거나, 손 들면 선생님이 예시를 드려요.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기 · 1분</span><h3>오늘 배우는 기법 4 · 5</h3></div>
+        <div class="grid2">
+          <div class="mini"><span class="tag" style="align-self:flex-start">기법 4 · 역할 주기</span>
+            <p class="note">기법 없이</p><p>가사 써 줘</p>
+            <p class="note">기법 넣으면</p><p><span class="slot">너는 중학생 마음을 잘 아는 국악 힙합 작사가야.</span> 가사 써 줘</p>
+            <p class="note">→ 역할을 정해 주면 말투 · 단어 선택이 그 역할답게 바뀌어요</p></div>
+          <div class="mini"><span class="tag" style="align-self:flex-start">기법 5 · 형식 지정</span>
+            <p class="note">기법 없이</p><p>가사 써 줘</p>
+            <p class="note">기법 넣으면</p><p>가사 써 줘. <span class="slot">벌스 앞에 [Verse], 후렴 앞에 [Chorus]를 붙이고 벌스 4줄 · 후렴 4줄로</span></p>
+            <p class="note">→ 모양을 정해 주면 노래 AI가 어디가 후렴인지 알아들어요</p></div>
+        </div>
+        <p class="note">역할까지 넣으면 제미나이를 만든 Google이 말하는 좋은 질문 네 가지(역할 · 과제 · 맥락 · 형식)가 다 모여요.</p>
+      </article>
+
+      <article class="card do" id="c-lyric">
+        <div class="card-h"><span class="badge do">만들기 1 · 5분</span><h3>세 칸 채우기 + 기법 4 · 5로 내 가사 프롬프트 직접 쓰기</h3></div>
+        <ol class="steps">
+          <li><span>1교시 대화창에서 <b>세 칸 + 역할 + 형식</b>으로 직접 쓰기<small>곡 주제는 1교시 2번 칸 · <b data-show="topic" data-empty="(비어 있음)"></b></small></span></li>
+          <li><span>결과를 기준 3개로 판정</span></li>
+          <li><span>부족한 칸만 꼬리 질문(기법 3)으로 고치기</span></li>
+          <li><span>그래도 어려우면 아래 선생님 예시와 비교</span></li>
+        </ol>
+        <label class="field"><span>내가 쓴 가사 프롬프트 <small class="note">(선택 · 4교시 발표 때 써요)</small></span><textarea id="p2-myLyricPrompt" data-k="p2.myLyricPrompt" rows="2" placeholder="제미나이에 넣은 내 문장을 붙여넣어요"></textarea></label>
+        <div class="field"><span class="flabel">② 결과 판정</span>
+          <div class="checks">
+            <label class="ck"><input type="checkbox" data-k="p2.lj1">내 이야기인가?</label>
+            <label class="ck"><input type="checkbox" data-k="p2.lj2">후렴이 짧고 따라 부르기 쉬운가?</label>
+            <label class="ck"><input type="checkbox" data-k="p2.lj3">[Verse] · [Chorus] · 줄 수가 맞나?</label>
+          </div>
+        </div>
+        <div><p class="sub">③ 부족한 칸만 꼬리 질문</p>
+          <div class="chips"><button type="button" class="chip" data-copy="후렴을 4줄, 더 짧게">후렴을 4줄, 더 짧게</button><button type="button" class="chip" data-copy="후렴을 더 짧게, 떼창하기 쉽게 다시 써 줘">후렴을 더 짧게, 떼창하기 쉽게 다시 써 줘</button><button type="button" class="chip" data-copy="벌스 4줄, 후렴 4줄로만 다시 써 줘">벌스 4줄, 후렴 4줄로만 다시 써 줘</button></div>
+        </div>
+        <details class="more"><summary>막히면 · 선생님 예시 보기</summary><div><div class="prompt" data-p="lyric"></div></div></details>
+      </article>
+
+      <article class="card do" id="c-p2k1">
+        <div class="card-h"><span class="badge do">만들기 2 · 2분 · 활동지 1번 칸</span><span class="tag">기법 6</span><h3>AI 가사는 초안, 한 줄은 꼭 내 말로</h3></div>
+        <ol class="steps">
+          <li><span>내 가사를 소리 내 읽기</span></li>
+          <li><span>어색한 줄 1개 고르기<small>평소에 안 쓰는 말 · 소리 내 읽으면 어색한 말 · 내 이야기가 안 들어간 말</small></span></li>
+          <li><span>1번 칸에 고치기 전 → 후를 쓰고, 아래 프롬프트로 그 줄만 바꿔 달라고 하기</span></li>
+        </ol>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">1번 칸</span>고친 가사 · 고치기 전 → 후<span class="need" data-need="p2.before p2.after"></span></div>
+          <div class="kan-b">
+            <div class="arrow2">
+              <label class="field"><span>AI가 쓴 줄</span><input type="text" id="p2-before" data-k="p2.before" placeholder="예) 자유의 날개를 활짝 펼쳐" autocomplete="off"></label>
+              <span class="ar" aria-hidden="true">→</span>
+              <label class="field"><span>내가 고친 줄</span><input type="text" id="p2-after" data-k="p2.after" placeholder="예) 가방 던지고 운동장으로 뛰어" autocomplete="off"></label>
+            </div>
+          </div>
+        </div>
+        <div class="prompt" data-p="oneLine"></div>
+        <p class="note">어색한 줄 하나만 바꿔서 다시 받는 것, 이게 기법 6 <b>한 가지만 바꾸기</b>예요. 여러 줄을 한꺼번에 바꾸면 뭐가 좋아졌는지 몰라요.</p>
+        <label class="field"><span>완성 가사 붙여넣기 <small class="note">· 바뀐 가사 전체를 [Verse] · [Chorus] 표시까지 복사해 붙여넣어요. 노래 만들 때, 3 · 4교시 자막에 써요</small></span>
+          <textarea id="p2-lyrics" data-k="p2.lyrics" rows="7" placeholder="[Verse]&#10;종이 울렸다 펜을 내려놔&#10;…&#10;[Chorus]&#10;끝났다 끝났어 시험이 끝났다&#10;…"></textarea></label>
+        <div class="mini"><b>내 후렴 4줄</b><ol class="plain" data-chorus-list></ol><p class="note" data-chorus-empty>완성 가사에 [Chorus]가 있으면 여기에 후렴 줄이 나와요.</p></div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>만든 파일은 공유 폴더에 올려요</h3></div>
+        <ol class="steps">
+          <li><span>맨 위 <b>공유 폴더</b> 링크를 눌러요 <a class="btn sm" data-link="folder" target="_blank" rel="noopener">공유 폴더 열기</a></span></li>
+          <li><span>번호 · 이름이 적힌 내 폴더를 두 번 클릭</span></li>
+          <li><span>왼쪽 위 '+ 새로 만들기'에서 '파일 업로드'</span></li>
+          <li><span>내 파일 › 다운로드에서 파일을 고르고 '열기'</span></li>
+          <li><span>목록에 내 파일이 보이면 끝 · 노래 · 그림마다 똑같이</span></li>
+        </ol>
+        <p class="note">크롬북에만 두면 다음 시간에 없어질 수 있어요. 오늘 쓰는 AI는 무료 계정이라 만들 수 있는 양이 정해져 있어요. 누르기 전에 꼭 생각해요.</p>
+      </article>
+
+      <article class="card" id="c-songpick" data-chooser="song">
+        <div class="card-h"><span class="badge follow">우리 반 노래 도구</span><h3>선생님이 말한 노래 도구를 골라요</h3></div>
+        <div class="seg" role="radiogroup" aria-label="노래 도구">
+          <label><input type="radio" name="songChoice" data-k="songChoice" value="gemini">제미나이</label>
+          <label><input type="radio" name="songChoice" data-k="songChoice" value="suno">Suno</label>
+        </div>
+      </article>
+
+      <!-- 제미나이 노래 반 -->
+      <article class="card tool-block" data-song="gemini">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>제미나이에서 노래 만드는 곳 · 설정 3가지</h3></div>
+        <ol class="steps">
+          <li><span>제미나이 탭(가사를 만든 1교시 대화창) → 입력창 옆 <b>'도구'</b> → <b>'음악 만들기'</b><small>안 보이면 손 들기</small></span></li>
+          <li><span><b>길이</b> · 표준 그대로 두기<small>숏폼에는 후렴만 쓰니까 길게 만들 필요 없어요</small></span></li>
+          <li><span><b>보컬</b> · 반드시 켜기<small>끄면 가사 없이 반주만 나와요</small></span></li>
+          <li><span><b>장르</b> · 내 테마에 맞게 아래 표에서 골라요</span></li>
+        </ol>
+        <div class="tbl-wrap"><table class="tbl" id="genreTbl">
+          <thead><tr><th>테마</th><th>추천 장르</th></tr></thead>
+          <tbody><tr data-theme-row="joseon"><td>조선 힙합</td><td>힙합</td></tr><tr data-theme-row="game"><td>게임 음악</td><td>일렉트로닉</td></tr><tr data-theme-row="anime"><td>애니 음악</td><td>록</td></tr><tr data-theme-row="free"><td>자율</td><td>내 노래에 맞게</td></tr></tbody>
+        </table></div>
+        <p class="note">장르 이름은 실제 제미나이 목록과 조금 다를 수 있어요 → 가장 비슷한 것으로. 설정 3가지가 세 칸 채우기의 '어떤 느낌으로' 칸이에요.</p>
+      </article>
+
+      <article class="card do tool-block" data-song="gemini">
+        <div class="card-h"><span class="badge do">만들기 3 · 13분</span><span class="tag">기법 6</span><h3>제미나이로 내 노래 만들기</h3></div>
+        <ol class="steps">
+          <li><span>길이 표준 · 보컬 켜짐 · 장르 확인</span></li>
+          <li><span>아래 프롬프트를 복사해 넣고, 셀프 체크 3개 확인하고 요청</span></li>
+          <li><span>노래가 나오면 후렴을 자세히 듣기</span></li>
+          <li><span>마음에 안 들면 <b>후렴 설명 한 줄만</b> 바꿔 다시</span></li>
+        </ol>
+        <div class="prompt" data-p="gsong"></div>
+        <div class="phr"><span>다시 할 땐 후렴 설명만 바꿔요 (기법 6)</span><div class="chips"><button type="button" class="chip ins" data-fill-slot="chorusFeel" data-text="북소리를 크게, 여러 명이 외치듯이">북소리를 크게, 여러 명이 외치듯이</button><button type="button" class="chip ins" data-fill-slot="chorusFeel" data-text="">처음 설명으로</button></div></div>
+        <div class="grid2">
+          <div class="field"><span class="flabel">결과 판정 (들으면서 체크)</span>
+            <div class="checks col">
+              <label class="ck"><input type="checkbox" data-k="p2.gj1">후렴이 또렷하게 들리나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.gj2">분위기가 내 테마와 맞나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.gj3">한국어 발음이 자연스럽나?</label>
+            </div>
+          </div>
+          <div class="field"><span class="flabel">누르기 전에</span>
+            <div class="checks col">
+              <label class="ck"><input type="checkbox" data-k="p2.gb1">바꿀 것 하나 정했나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.gb2">프롬프트 다시 읽었나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.gb3">남은 기회는?</label>
+            </div>
+          </div>
+        </div>
+        <div class="tries" data-tries="p2.triesG" data-max="3"><span class="tries-l">오늘 최대 3번</span><span class="dots"></span><span class="tries-s"></span><button type="button" class="btn sm" data-try="1">만들기 눌렀어요 +1</button><button type="button" class="btn ghost sm" data-try="-1">되돌리기</button></div>
+        <p class="note">3번을 다 쓰면 만든 곡 중에서 골라요 · 없으면 짝의 곡 · 예비 곡. 만드는 동안(1~2분)은 후렴 한 줄마다 어울리는 장면을 짝과 말해 봐요. 실제 가수 이름은 넣지 않아요.</p>
+        <p class="tip">소리는 볼륨 1~2칸 · 크롬북은 몸 쪽으로 · 선생님이 설명할 땐 일시정지하고 선생님 보기</p>
+      </article>
+
+      <!-- Suno 반 -->
+      <article class="card tool-block" data-song="suno">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>Suno 가입 · 로그인 · 생년월일</h3></div>
+        <ol class="steps">
+          <li><span>맨 위 <b>Suno</b> 링크 → 새 탭 → 오른쪽 위 <b>Sign Up</b><small>이미 계정이 있으면 <b>Sign In</b>으로 로그인</small></span></li>
+          <li><span>가입 방법은 <b>보호자와 정한 방법 그대로</b><small>학교 교육용 계정이 아니에요 · Continue with Google 또는 보호자와 정한 방법</small></span></li>
+          <li><span>로그인 창에서 내 계정을 고르고 '계속'</span></li>
+          <li><span>생년월일 · <b>실제 태어난 해 그대로</b> · 월 · 일도 내 생일 그대로 → <b>Continue</b><small>중3은 대부분 2011년이에요</small></span></li>
+          <li><span>왼쪽 메뉴의 <b>Create</b> 화면이 열리면 끝</span></li>
+        </ol>
+        <p class="warn"><b>나이를 바꿔 쓰지 않아요.</b> Suno는 18세 미만이면 보호자 동의가 있어야 쓸 수 있어요. 가입이 막히면 손 들기 → 짝과 2인 1조로 해요.</p>
+        <div class="mini"><b>Suno 화면, 네 곳만 알면 돼요</b><ul><li>Create 메뉴 · 노래를 만드는 화면으로 가요</li><li>만들기 칸 · 가사 · 노래 느낌 · 제목을 넣어요</li><li>만든 곡 목록 · 한 번 만들면 2곡이 여기에 · ▶ 재생 · ⋯ 메뉴</li><li>크레딧 · 남은 기회예요, 만들 때마다 줄어요</li></ul></div>
+      </article>
+
+      <article class="card do tool-block" data-song="suno">
+        <div class="card-h"><span class="badge do">만들기 3 · 12분</span><span class="tag">기법 6</span><h3>Suno로 내 노래 만들기</h3></div>
+        <ol class="steps">
+          <li><span>가사 · 노래 느낌 · 제목 칸 채우기 (아래에서 복사)</span></li>
+          <li><span>셀프 체크 3개 확인하고 <b>Create</b></span></li>
+          <li><span>2곡 나오면 후렴을 자세히 듣기</span></li>
+          <li><span>마음에 안 들면 <b>노래 느낌 단어 하나만</b> 바꿔 다시</span></li>
+        </ol>
+        <div class="prompt" data-p="sunoLyrics" data-noslots></div>
+        <div class="prompt" data-p="sunoStyle"></div>
+        <div class="prompt" data-p="sunoTitle"></div>
+        <p class="note">노래 느낌 예시는 테마에 따라 바뀌어요 · 실제 가수 이름은 넣지 않아요.</p>
+        <div class="grid2">
+          <div class="field"><span class="flabel">결과 판정 (들으면서 체크)</span>
+            <div class="checks col">
+              <label class="ck"><input type="checkbox" data-k="p2.sj1">후렴이 또렷하게 들리나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.sj2">분위기가 내 테마와 맞나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.sj3">한국어 발음이 자연스럽나?</label>
+            </div>
+          </div>
+          <div class="field"><span class="flabel">누르기 전에</span>
+            <div class="checks col">
+              <label class="ck"><input type="checkbox" data-k="p2.sb1">바꿀 것 하나 정했나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.sb2">프롬프트 다시 읽었나?</label>
+              <label class="ck"><input type="checkbox" data-k="p2.sb3">남은 기회는?</label>
+            </div>
+          </div>
+        </div>
+        <div class="tries" data-tries="p2.triesS" data-max="3"><span class="tries-l">하루 3번 (6곡)</span><span class="dots"></span><span class="tries-s"></span><button type="button" class="btn sm" data-try="1">Create 눌렀어요 +1</button><button type="button" class="btn ghost sm" data-try="-1">되돌리기</button></div>
+        <p class="note">기회를 다 쓰면 만든 곡 중에서 골라요 · 없으면 짝의 곡 · 예비 곡. 만드는 동안(1~2분)은 후렴 한 줄마다 어울리는 장면을 짝과 말해 봐요.</p>
+        <p class="tip">소리는 볼륨 1~2칸 · 크롬북은 몸 쪽으로 · 선생님이 설명할 땐 일시정지하고 선생님 보기</p>
+      </article>
+
+      <article class="card do" id="c-p2k2">
+        <div class="card-h"><span class="badge do">만들기 4 · 3분 · 활동지 2번 칸</span><h3>후렴을 듣고 시간을 적어요</h3></div>
+        <p class="lead">숏폼에는 후렴만 들어가요. 후렴이 시작 · 끝나는 시간을 찾아 적어요. 3교시 편집 때 그대로 써요.</p>
+        <ol class="steps">
+          <li class="tool-block" data-song="suno"><span>2곡을 차례로 들어요 (볼륨 작게) · <b>가사 보기</b>를 켜면 [Chorus]가 나오는 시간이 보여요</span></li>
+          <li><span>후렴이 나오는 시간을 봐요 (재생 시간)</span></li>
+          <li class="tool-block" data-song="suno"><span>후렴이 더 좋은 곡 하나를 고르고, 그 곡만 다음에 내려받아요</span></li>
+        </ol>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">2번 칸</span>후렴 시간<span class="need" data-need="@chorus"></span></div>
+          <div class="kan-b">
+            <div class="time">
+              <div class="tset">시작 <input type="number" min="0" max="9" inputmode="numeric" id="p2-cs-m" data-k="p2.cs_m" aria-label="시작 분">분 <input type="number" min="0" max="59" inputmode="numeric" id="p2-cs-s" data-k="p2.cs_s" aria-label="시작 초">초</div>
+              <div class="tset">끝 <input type="number" min="0" max="9" inputmode="numeric" id="p2-ce-m" data-k="p2.ce_m" aria-label="끝 분">분 <input type="number" min="0" max="59" inputmode="numeric" id="p2-ce-s" data-k="p2.ce_s" aria-label="끝 초">초</div>
+              <p class="result" data-show="chorusTime" data-empty="시작과 끝을 적으면 길이가 나와요"></p>
+            </div>
+            <p class="warn" id="chorusWarn" hidden></p>
+            <label class="ck" style="align-self:flex-start"><input type="checkbox" data-k="p2.sample">샘플 음악으로 진행했어요</label>
+            <p class="example">선생님 예) <b>0:42 ~ 1:10</b> → 약 28초 · 30초를 넘으면 3교시에 앞뒤를 잘라요</p>
+          </div>
+        </div>
+        <div class="warn row"><span style="flex:1 1 260px"><b>⚠ 구글 오류로 노래가 안 만들어지면</b> → '샘플 음악'을 내려받아 AI로 만든 샘플 노래로 진행해요. 2번 칸에 '샘플'도 체크해요.</span><a class="btn warnb" data-link="sample" target="_blank" rel="noopener">샘플 음악 다운로드</a></div>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 5 · 1분</span><h3>노래를 내려받아 공유 폴더에</h3></div>
+        <ol class="steps">
+          <li class="tool-block" data-song="gemini"><span>마음에 드는 노래를 골라 끝까지 소리가 나는지 확인 → 노래 오른쪽 아래 화살표 <b>'내려받기'</b></span></li>
+          <li class="tool-block" data-song="suno"><span>고른 곡 오른쪽 <b>⋯</b> → <b>Download</b> → <b>MP3 Audio</b><small>다운로드는 평생 7번 · 고른 1곡만 한 번만</small></span></li>
+          <li><span>파일 이름을 바꿔요 <button type="button" class="chip file" data-copy-show="fileSong"><span data-show="fileSong"></span></button></span></li>
+          <li><span>공유 폴더 → 내 폴더에 업로드</span></li>
+        </ol>
+        <label class="ck" style="align-self:flex-start"><input type="checkbox" data-k="p2.upSong">공유 폴더에 노래 파일을 올렸어요</label>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 6 · 3분</span><span class="tag">기법 3</span><h3>후렴 4줄을 장면 4개로</h3></div>
+        <p class="lead">가사를 만든 그 대화창에서 이어서 물어요. 제미나이가 내 가사를 이미 알고 있어요.</p>
+        <div class="prompt" data-p="scenes"></div>
+        <div class="field"><span class="flabel">장면 ①~④ <small class="note">(선택 · 적어 두면 3교시에 편해요)</small></span>
+          <div class="grid2">
+            <input type="text" id="p2-sc1" data-k="p2.sc1" placeholder="① 예) 호랑이가 교실 문을 열고 들어온다" aria-label="장면 1" autocomplete="off">
+            <input type="text" id="p2-sc2" data-k="p2.sc2" placeholder="② 예) 시험지가 부채처럼 펼쳐져 날아간다" aria-label="장면 2" autocomplete="off">
+            <input type="text" id="p2-sc3" data-k="p2.sc3" placeholder="③ 예) 궁궐 앞마당에서 다 같이 떼창" aria-label="장면 3" autocomplete="off">
+            <input type="text" id="p2-sc4" data-k="p2.sc4" placeholder="④ 예) 큰 북을 치는 호랑이" aria-label="장면 4" autocomplete="off">
+          </div>
+        </div>
+        <div class="prompt" data-p="sceneFix"></div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기 · 30초</span><h3>4장이 한 작품처럼, 그림체를 통일해요</h3></div>
+        <ol class="steps">
+          <li><span><b>새 채팅 열지 않기</b><small>4장 모두 한 대화창에서</small></span></li>
+          <li><span><b>주인공 생김새를 구체적으로</b><small>색 · 옷 · 체형까지 · 예) 그냥 '호랑이' → '주황색 줄무늬에 파란 갓을 쓴 통통한 호랑이'</small></span></li>
+          <li><span><b>그림체 문장은 그대로</b><small>매번 똑같이 붙여요</small></span></li>
+          <li><span><b>달라지면 "앞 그림과 같은 화풍으로 다시"</b><small>꼬리 질문으로 고쳐요</small></span></li>
+        </ol>
+        <p class="warn"><b>실사 사진 스타일은 피하기.</b> 실제 사람처럼 보이면 문제가 될 수 있어요 (4교시에).</p>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 7 · 5분</span><h3>첫 장면 1장으로 그림체 · 주인공 정하기</h3></div>
+        <ol class="steps">
+          <li><span>아래 프롬프트의 주황 칸을 내 것으로 바꾸고 복사해 입력</span></li>
+          <li><span>확인 · 그림체 · 주인공 · 글자 없음</span></li>
+          <li><span>고칠 땐 꼬리 프롬프트로 한 가지만</span></li>
+          <li><span>그림 눌러 내려받기 → <button type="button" class="chip file" data-copy="장면1">장면1</button>.png로 이름 바꿔 → 공유 폴더에 업로드</span></li>
+        </ol>
+        <div class="prompt" data-p="first"></div>
+        <div class="field"><span class="flabel">확인</span>
+          <div class="checks">
+            <label class="ck"><input type="checkbox" data-k="p2.fc1">그림체가 맞다</label>
+            <label class="ck"><input type="checkbox" data-k="p2.fc2">주인공이 맞다</label>
+            <label class="ck"><input type="checkbox" data-k="p2.fc3">글자가 없다</label>
+          </div>
+        </div>
+        <div class="prompt" data-p="firstFix"></div>
+        <div class="chips"><span class="note">글자가 들어가면</span><button type="button" class="chip" data-copy="앞 그림과 같게, 글자만 모두 빼 줘">앞 그림과 같게, 글자만 모두 빼 줘</button></div>
+        <label class="ck" style="align-self:flex-start"><input type="checkbox" data-k="p2.upImg">공유 폴더에 장면1.png를 올렸어요</label>
+        <p class="note">오늘은 첫 장면 1장만. 나머지 3장(②~④)은 3교시에 이 대화창에서 이어서 그려요. 그림은 하루 약 20장까지예요 (다시 요청한 것도 1장).</p>
+      </article>
+    </div>
+    <div class="panel-foot">
+      <p class="method"><b>모든 기법에 똑같이</b> · 쓰고 → 판정하고 → 필요한 부분만 수정 요청하기</p>
+      <p class="note">쉬는 시간 전에 · 공유 폴더에 노래 파일과 장면1.png 확인 · 활동지 탭과 제미나이 대화창은 닫지 않기 · 개인 계정으로 로그인한 Suno는 로그아웃</p>
+    </div>
+  </section>
+
+  <!-- ================= 3교시 ================= -->
+  <section class="panel" id="p3" role="tabpanel" aria-labelledby="tab-p3" hidden>
+    <header class="ph">
+      <span class="ph-n" aria-hidden="true">3</span>
+      <div><h2>이미지 완성과 숏폼 편집</h2><p class="make">만드는 것 · 그림 3장(②~④) + 숏폼 편집 시작</p></div>
+      <div class="ph-meta">
+        <div><p class="box-l">기법 지도 · 오늘은 7 · 8</p><ul class="techs" data-techs="3"></ul></div>
+        <div><p class="box-l">오늘 남길 것</p>
+          <ul class="leave">
+            <li>1번 칸 · 장면 ③ 또는 ④ 내 프롬프트<span class="need" data-need="p3.myPrompt"></span></li>
+            <li>공유 폴더 · 장면2~4.png<span class="need" data-need="p3.up2 p3.up3 p3.up4"></span></li>
+            <li>편집 중인 숏폼 · 노래 + 그림 4장<span class="need" data-need="p3.stepSong p3.stepImg"></span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="stack">
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 1 · 4분</span><h3>지난 시간 재료를 꺼내요</h3></div>
+        <ol class="steps">
+          <li><span>맨 위 <b>공유 폴더</b> 링크 → 내 이름 폴더 열기 (활동지 탭은 그대로)</span></li>
+          <li><span>노래 파일 · 장면1.png를 오른쪽 클릭 → 다운로드 (크롬북에 저장)</span></li>
+          <li><span>맨 위 <b>제미나이</b> 링크 → 왼쪽 최근 대화에서 <b>첫 그림을 그린 대화</b> 열기</span></li>
+          <li><span>2교시 2번 칸의 후렴 시간 확인 · <b data-show="chorusTime" data-empty="(비어 있음)"></b></span></li>
+        </ol>
+        <div class="checks">
+          <label class="ck"><input type="checkbox" data-k="p3.m1">노래 파일 1곡</label>
+          <label class="ck"><input type="checkbox" data-k="p3.m2">장면1.png</label>
+          <label class="ck"><input type="checkbox" data-k="p3.m3">후렴 시간</label>
+          <label class="ck"><input type="checkbox" data-k="p3.m4">제미나이 지난 대화</label>
+        </div>
+        <div class="grid2">
+          <details class="more"><summary>첫 그림을 못 끝냈다면</summary><div><p class="note">2교시 첫 장면 프롬프트로 지금 1장만 그려요. 그림체 · 주인공 문장을 꼭 넣기.</p><div class="prompt" data-p="first"></div></div></details>
+          <div class="mini"><b>파일이 아예 없다면?</b><p>손 들기 → 공유 폴더 <b>'예비'</b> 폴더의 예비 곡 · 예비 그림으로 바로 편집에 참여해요. 결석했거나 저장을 못 한 사람도 똑같이.</p></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기 · 1분</span><h3>오늘 배우는 기법 7 · 8</h3></div>
+        <div class="grid2">
+          <div class="mini"><span class="tag" style="align-self:flex-start">기법 7 · 예시 주기</span>
+            <p class="note">기법 없이</p><p>호랑이가 북을 치는 장면 그려 줘</p>
+            <p class="note">기법 넣으면</p><p><span class="slot">첫 번째 그림처럼 같은 화풍 · 같은 호랑이로</span>, 호랑이가 북을 치는 장면 그려 줘</p>
+            <p class="note">→ 말로 설명하기 어려운 그림체를 본보기로 그대로 이어 가요</p></div>
+          <div class="mini"><span class="tag" style="align-self:flex-start">기법 8 · 금지 조건</span>
+            <p class="note">기법 없이</p><p>호랑이가 북을 치는 장면 그려 줘</p>
+            <p class="note">기법 넣으면</p><p>호랑이가 북을 치는 장면 그려 줘. <span class="slot">글자는 넣지 마. 실사 사진처럼 그리지 마.</span></p>
+            <p class="note">→ 빼야 할 것을 말하면 자주 생기는 실수를 미리 막아요</p></div>
+        </div>
+      </article>
+
+      <article class="card do" id="c-p3k1">
+        <div class="card-h"><span class="badge do">만들기 2 · 12분 · 활동지 1번 칸</span><span class="tag">기법 7 · 8</span><h3>장면 ②는 예시로, ③ · ④는 내가 직접</h3></div>
+        <p class="warn"><b>지난 시간에 첫 장면을 그린 그 대화창에서</b> 이어서 그려요. 새 채팅을 열면 그림체가 달라져요.</p>
+        <p class="sub">1 · 장면 ② · 예시로 그리기</p>
+        <div class="prompt" data-p="scene2"></div>
+        <p class="sub">2 · 장면 ③ · ④ · 템플릿 없이 직접 쓰기</p>
+        <div class="mini"><b>내 장면 (2교시에 받은 것)</b><p>③ <span data-show="sc3" data-empty="(2교시에 안 적었어요 · 제미나이 대화에서 확인)"></span></p><p>④ <span data-show="sc4" data-empty="(2교시에 안 적었어요 · 제미나이 대화에서 확인)"></span></p></div>
+        <div class="field"><span class="flabel">이 다섯 가지가 들어갔는지 체크</span>
+          <div class="checks">
+            <label class="ck"><input type="checkbox" data-k="p3.k1">무엇을 · 장면 내용</label>
+            <label class="ck"><input type="checkbox" data-k="p3.k2">어떤 느낌으로 · 그림체 문장</label>
+            <label class="ck"><input type="checkbox" data-k="p3.k3">조건 · 세로 화면</label>
+            <label class="ck"><input type="checkbox" data-k="p3.k4">기법 7 예시 주기 · '첫 번째 그림처럼'</label>
+            <label class="ck"><input type="checkbox" data-k="p3.k5">기법 8 금지 조건 · 글자 · 실사 금지</label>
+          </div>
+        </div>
+        <details class="more"><summary>막히면 · 장면 ③ 예시 보기</summary><div><div class="prompt" data-p="scene3alt"></div><p class="note">장면 내용은 예시 그대로 쓰지 말고 내 장면 4개에서 가져와요.</p></div></details>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">1번 칸</span>장면 ③ 또는 ④의 내 프롬프트<span class="need" data-need="p3.myPrompt"></span></div>
+          <div class="kan-b">
+            <div class="seg" role="radiogroup" aria-label="어느 장면">
+              <label><input type="radio" name="p3which" data-k="p3.which" value="3">장면 ③</label>
+              <label><input type="radio" name="p3which" data-k="p3.which" value="4">장면 ④</label>
+            </div>
+            <label class="field"><span>내 프롬프트 붙여넣기</span><textarea id="p3-myPrompt" data-k="p3.myPrompt" rows="3" placeholder="제미나이에 넣은 내 장면 프롬프트를 붙여넣어요"></textarea></label>
+            <div class="field"><span class="flabel">들어간 기법 고르기</span>
+              <div class="checks" data-techpick="p3.t"></div>
+            </div>
+          </div>
+        </div>
+        <p class="sub">3 · 다 그렸으면 짝과 판정</p>
+        <div class="checks">
+          <label class="ck"><input type="checkbox" data-k="p3.j1">4장 그림체가 같다</label>
+          <label class="ck"><input type="checkbox" data-k="p3.j2">주인공이 같아 보인다</label>
+          <label class="ck"><input type="checkbox" data-k="p3.j3">그림에 글자가 없다</label>
+        </div>
+        <p class="note">하나라도 아니면 → 아래 '그림이 달라졌을 때'의 꼬리 프롬프트로 고쳐요.</p>
+        <p class="sub">4 · 내려받아 공유 폴더에</p>
+        <div class="row">
+          <button type="button" class="chip file" data-copy="장면2">장면2</button><button type="button" class="chip file" data-copy="장면3">장면3</button><button type="button" class="chip file" data-copy="장면4">장면4</button><span class="note">.png로 이름 바꾸기</span>
+        </div>
+        <div class="checks">
+          <label class="ck"><input type="checkbox" data-k="p3.up2">장면2.png 올림</label>
+          <label class="ck"><input type="checkbox" data-k="p3.up3">장면3.png 올림</label>
+          <label class="ck"><input type="checkbox" data-k="p3.up4">장면4.png 올림</label>
+        </div>
+        <p class="note">빨리 끝났으면 같은 대화에서 앨범 커버도 그려 봐요.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">필요할 때 보기</span><h3>그림이 달라졌을 때 이렇게 고쳐요</h3></div>
+        <div class="grid3">
+          <div class="field"><span class="flabel">그림체가 달라졌어요</span><div class="prompt" data-p="fixStyle"></div></div>
+          <div class="field"><span class="flabel">주인공이 달라 보여요</span><div class="prompt" data-p="fixHero" data-noslots></div></div>
+          <div class="field"><span class="flabel">그림에 글자가 들어갔어요</span><div class="prompt" data-p="fixText"></div></div>
+        </div>
+        <p class="note">고칠 땐 한 가지만 (기법 6) · 다시 요청한 것도 1장으로 세어져요 · 주인공 문장은 2교시 첫 장면 프롬프트의 것을 그대로 써요.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">선생님 시연 · 2분</span><h3>그림을 움직이는 영상으로 바꾸는 AI도 있어요</h3></div>
+        <p class="lead">Flow는 만 18세 이상만 써요. 그래서 오늘은 선생님만 보여 줘요. 우리는 노래 + 그림 4장을 편집 프로그램으로 합쳐 30초 미만 숏폼을 만들어요.</p>
+        <label class="field"><span>왜 나이 제한이 있을까? <small class="note">생각해 두기 · 답은 4교시</small></span><input type="text" id="p3-flow" data-k="p3.flow" placeholder="내 생각 한 줄" autocomplete="off"></label>
+      </article>
+
+      <article class="card" id="c-edit">
+        <div class="card-h"><span class="badge see">같이 보기</span><h3>편집은 한 단계씩 같이 가요 · 가사가 바뀌는 곳에서 그림도 바뀌어요</h3></div>
+        <div class="tl" aria-label="내 숏폼 편집 순서">
+          <div class="tl-row"><span class="tl-l">노래</span><div class="tl-track one song"><span>후렴만 · <b data-show="chorusTime" data-empty="2교시 2번 칸의 시간"></b></span></div></div>
+          <div class="tl-row"><span class="tl-l">가사</span><div class="tl-track"><span data-show="ch1"></span><span data-show="ch2"></span><span data-show="ch3"></span><span data-show="ch4"></span></div></div>
+          <div class="tl-row"><span class="tl-l">그림</span><div class="tl-track pic"><span>그림 ①</span><span>그림 ②</span><span>그림 ③</span><span>그림 ④</span></div></div>
+          <div class="tl-row"><span class="tl-l">자막</span><div class="tl-track sub"><span>4교시</span><span>4교시</span><span>4교시</span><span>4교시</span></div></div>
+          <div class="tl-axis"><span>0초</span><span>30초 미만</span></div>
+        </div>
+        <div class="grid3">
+          <div class="mini"><b>진행 방법</b><ul><li>선생님 시연 1분</li><li>따라 하기</li><li>끝나면 손들기 · 반 정도 넘게 손들면 다음 단계</li></ul></div>
+          <div class="mini"><b>소리</b><ul><li>볼륨 1~2칸 · 크롬북은 몸 쪽으로</li><li>선생님이 설명할 땐 선생님 쪽 보기 · 음악은 일시정지</li></ul></div>
+          <div class="mini"><b>먼저 끝났다면</b><ul><li>옆 친구 도우미</li><li>숏폼 제목 자막 미리 정하기</li><li>앨범 커버 그리기 (같은 대화창)</li></ul></div>
+        </div>
+      </article>
+
+      <article class="card" data-chooser="edit">
+        <div class="card-h"><span class="badge follow">우리 반 편집 도구</span><h3>선생님이 말한 편집 도구를 골라요</h3></div>
+        <div class="seg" role="radiogroup" aria-label="편집 도구">
+          <label><input type="radio" name="editChoice" data-k="editChoice" value="canva">Canva</label>
+          <label><input type="radio" name="editChoice" data-k="editChoice" value="cutter">비디오 커터</label>
+        </div>
+      </article>
+
+      <!-- Canva 반 -->
+      <article class="card tool-block" data-edit="canva">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>Canva 시작하기 · 약관 → 로그인 → Shorts 만들기</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><b>① 이용약관에 먼저 동의해요</b><label class="ck"><input type="checkbox" data-k="p3.cv1">됐어요</label></div>
+            <ol class="steps"><li><span>맨 위 <b>Canva</b> 링크 → 새 탭이 열려요 (활동지 탭은 그대로)</span></li><li><span>선생님과 같이 읽고 <b>이용약관 · 개인정보 처리방침</b> 두 칸 체크</span></li><li><span><b>'동의하고 계속'</b> → 로그인 화면이 열려요</span></li></ol>
+            <p class="note">약관 화면 없이 바로 로그인 화면이 뜨면 이미 동의한 계정이에요. 다음으로.</p></div>
+          <div class="estep"><div class="estep-h"><b>② 교육용 계정으로 로그인해요</b><label class="ck"><input type="checkbox" data-k="p3.cv2">됐어요</label></div>
+            <ol class="steps"><li><span><b>'Google로 계속하기'</b></span></li><li><span>1교시에 로그인한 교육용 계정 고르기 → Canva 홈 화면</span></li></ol>
+            <p class="note">개인 계정이 먼저 뜨면 '다른 계정 사용' → 교육용 계정 · 안 되면 손 들기</p></div>
+          <div class="estep"><div class="estep-h"><b>③ YouTube Shorts 디자인 만들기</b><label class="ck"><input type="checkbox" data-k="p3.cv3">됐어요</label></div>
+            <ol class="steps"><li><span>홈 화면 왼쪽 위 보라색 <b>'+ 만들기'</b></span></li><li><span>'디자인 만들기' 창 왼쪽 목록에서 <b>동영상</b></span></li><li><span><b>YouTube Shorts</b> 선택 → 세로(1080 × 1920) 빈 화면이 열려요</span></li></ol>
+            <p class="note">가로 '동영상'을 고르면 숏폼이 안 돼요 → 뒤로 가서 YouTube Shorts · 목록에 없으면 창 위 검색칸에 Shorts</p></div>
+          <div class="estep"><div class="estep-h"><b>④ 편집 화면 다섯 곳 찾기</b><label class="ck"><input type="checkbox" data-k="p3.cv4">찾았어요</label></div>
+            <ul class="plain"><li><b>업로드</b> · 그림 · 노래 파일을 올려요</li><li><b>페이지</b> · 장면 하나 = 페이지 하나</li><li><b>타임라인</b> · 노래 길이와 장면 순서를 맞춰요</li><li><b>텍스트 · 애니메이션</b> · 가사 글자 · 움직임</li><li><b>공유 → 다운로드</b> · 4교시에 완성 파일로 받아요</li></ul></div>
+        </div>
+      </article>
+
+      <article class="card do tool-block" data-edit="canva">
+        <div class="card-h"><span class="badge do">만들기 3 ~ 6 · 20분</span><h3>Canva 편집 1 ~ 4단계 · 끝나면 체크하고 손들기</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 3 · 6분</span><b>1단계 · 노래를 얹고 후렴만, 30초 미만으로</b><label class="ck"><input type="checkbox" data-k="p3.stepSong">끝났어요</label></div>
+            <ol class="steps"><li><span>앞에서 연 세로 빈 화면에서 <b>업로드</b> → 노래 파일</span></li><li><span>올린 노래를 아래 타임라인으로 끌어다 놓기</span></li><li><span>노래 줄 양끝을 끌어 후렴 시간 <b data-show="chorusTime" data-empty="(2교시 2번 칸)"></b>에 맞추기 · 전체 30초 미만</span></li></ol></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 4 · 4분</span><b>2단계 · 가사를 텍스트로 넣어요</b><label class="ck"><input type="checkbox" data-k="p3.stepLyric">끝났어요</label></div>
+            <ol class="steps"><li><span>왼쪽 <b>'텍스트'</b> → 텍스트 상자 추가 · 화면 아래쪽에 두기</span></li><li><span>후렴 가사를 한 줄씩 · 크고 굵게 (아래에서 복사)</span></li><li><span>노래를 틀고 그 줄이 나올 때 뜨게 텍스트 길이 조절</span></li></ol>
+            <div class="lines" data-chorus-chips></div></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 5 · 6분</span><b>3단계 · 그림 4장을 가사 한 줄 길이만큼씩</b><label class="ck"><input type="checkbox" data-k="p3.stepImg">끝났어요</label></div>
+            <ol class="steps"><li><span><b>업로드</b>에서 장면1~4.png</span></li><li><span>+ 페이지로 4개를 만들고 순서대로 하나씩</span></li><li><span>노래를 틀고 가사 한 줄이 끝나는 곳에서 페이지 끝을 맞춰요</span></li></ol>
+            <p class="note">장면마다 길이가 달라도 괜찮아요. 그림 4장을 다 더하면 노래 길이와 같아지면 돼요.</p></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 6 · 4분</span><b>4단계 · 멈춘 그림에 움직임을 넣어요</b><label class="ck"><input type="checkbox" data-k="p3.stepMove">끝났어요</label></div>
+            <ol class="steps"><li><span>페이지의 그림을 한 번 클릭</span></li><li><span>위쪽 메뉴에서 <b>'애니메이션'</b></span></li><li><span>천천히 확대 · 옆으로 이동 · 흐리게 나타나기 중에서 고르기</span></li></ol>
+            <p class="note">화려한 효과보다 잔잔한 효과 · 4장 모두 같은 효과 → 통일감, 장면마다 다르게 → 변화</p></div>
+        </div>
+      </article>
+
+      <!-- 비디오 커터 반 -->
+      <article class="card tool-block" data-edit="cutter">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>비디오 커터 시작하기 · 열기 → 새 프로젝트 → 화면</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><b>① 로그인 없이 바로 열어요</b><label class="ck"><input type="checkbox" data-k="p3.ct1">됐어요</label></div>
+            <p>맨 위 <b>비디오 커터</b> 링크 → 새 탭이 열려요 (활동지 탭은 그대로)</p>
+            <p class="warn"><b>이 탭을 닫으면 작업이 사라져요.</b> 쉬는 시간에도 닫지 않기.</p></div>
+          <div class="estep"><div class="estep-h"><b>② '새 프로젝트'에서 세로로 시작해요</b><label class="ck"><input type="checkbox" data-k="p3.ct2">됐어요</label></div>
+            <ol class="steps"><li><span>편집기를 열면 처음에 '새 프로젝트' 창이 나와요</span></li><li><span>화면 비율에서 <b>9:16 · 세로 · 숏폼</b> 고르기</span></li><li><span><b>'만들기'</b></span></li></ol>
+            <p class="note">가로 16:9를 고르면 숏폼이 안 돼요 → 페이지 새로 고침 후 다시 · 창이 안 보이면 메뉴에서 '새 프로젝트'</p></div>
+          <div class="estep"><div class="estep-h"><b>③ 편집기 화면 네 곳 찾기</b><label class="ck"><input type="checkbox" data-k="p3.ct3">찾았어요</label></div>
+            <ul class="plain"><li><b>파일 열기</b> · 그림 · 노래를 올려요</li><li><b>타임라인</b> · 순서와 길이를 맞춰요</li><li><b>텍스트</b> · 자막을 넣어요 (4교시)</li><li><b>저장</b> · 완성 파일을 받아요 (4교시)</li></ul></div>
+        </div>
+      </article>
+
+      <article class="card do tool-block" data-edit="cutter">
+        <div class="card-h"><span class="badge do">만들기 3 · 4 · 16분</span><h3>비디오 커터 편집 1 · 2단계 · 끝나면 체크하고 손들기</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 3 · 8분</span><b>1단계 · 노래를 얹고 후렴만, 30초 미만으로</b><label class="ck"><input type="checkbox" data-k="p3.stepSong">끝났어요</label></div>
+            <ol class="steps"><li><span><b>파일 열기</b> → 노래 파일을 올려요</span></li><li><span>노래 줄 양끝을 끌어 후렴 시간 <b data-show="chorusTime" data-empty="(2교시 2번 칸)"></b>에 맞추기</span></li><li><span>전체가 30초를 넘지 않게</span></li></ol></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 4 · 8분</span><b>2단계 · 그림 4장을 가사 한 줄 길이만큼씩</b><label class="ck"><input type="checkbox" data-k="p3.stepImg">끝났어요</label></div>
+            <ol class="steps"><li><span><b>파일 열기</b> → 장면1~4.png</span></li><li><span>타임라인에서 순서를 ① → ④로 맞춰요</span></li><li><span>노래를 틀고 가사 한 줄이 끝나는 곳에서 그림 끝을 맞춰요</span></li></ol>
+            <p class="note">순서가 뒤바뀌면 타임라인에서 끌어 이동 · 그림이 잘리면 세로 화면에 맞춰 크기 조절</p></div>
+        </div>
+      </article>
+    </div>
+    <div class="panel-foot">
+      <p class="method"><b>모든 기법에 똑같이</b> · 쓰고 → 판정하고 → 필요한 부분만 수정 요청하기</p>
+      <p class="note">쉬는 시간 전에 · 편집 화면은 닫지 않기 (Canva는 자동 저장, 비디오 커터는 탭을 닫으면 사라져요) · 활동지 · 제미나이 탭도 그대로</p>
+    </div>
+  </section>
+
+  <!-- ================= 4교시 ================= -->
+  <section class="panel" id="p4" role="tabpanel" aria-labelledby="tab-p4" hidden>
+    <header class="ph">
+      <span class="ph-n" aria-hidden="true">4</span>
+      <div><h2>숏폼 상영과 AI 윤리</h2><p class="make">만드는 것 · 제목 · 자막 · 30초 숏폼 완성 + 나의 AI 활용 헌장</p></div>
+      <div class="ph-meta">
+        <div><p class="box-l">기법 지도 · 오늘은 9</p><ul class="techs" data-techs="4"></ul></div>
+        <div><p class="box-l">오늘 남길 것</p>
+          <ul class="leave">
+            <li>공유 폴더 · 완성 숏폼(MP4)<span class="need" data-need="p4.upShort"></span></li>
+            <li>1번 칸 · 프롬프트 여정<span class="need" data-need="p4.j1 p4.j3"></span></li>
+            <li>2번 칸 · 나의 AI 활용 헌장<span class="need" data-need="@charter"></span></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="stack">
+      <article class="card">
+        <div class="card-h"><span class="badge follow">따라 하기</span><h3>지금 열어 둘 것</h3></div>
+        <ol class="steps">
+          <li class="tool-block" data-edit="canva"><span>맨 위 <b>Canva</b> 링크 → 최근 디자인에서 3교시 숏폼 열기<small>자동 저장돼 있어요</small></span></li>
+          <li class="tool-block" data-edit="cutter"><span>3교시에 열어 둔 <b>비디오 커터</b> 탭 그대로<small>닫혔거나 날아갔으면 손 들기 → 예비 자료로 빠르게 다시</small></span></li>
+          <li><span>제미나이 탭은 그대로 (1교시 대화창)</span></li>
+        </ol>
+      </article>
+
+      <article class="card do tool-block" data-edit="canva">
+        <div class="card-h"><span class="badge do">만들기 1 · 2 · 9분</span><h3>Canva · 자막 확인하고 MP4로 저장</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 1 · 6분</span><b>그림마다 가사 한 줄씩 자막</b><label class="ck"><input type="checkbox" data-k="p4.sub">끝났어요</label></div>
+            <ol class="steps"><li><span>왼쪽 <b>'텍스트'</b> → 텍스트 상자 추가<small>3교시 2단계에서 가사를 넣었다면 나오는 때만 확인해요</small></span></li><li><span>그림마다 그 장면의 가사 한 줄 · 크고 굵게, 그림을 가리지 않는 곳에</span></li><li><span>노래를 틀고 그 줄이 나올 때 뜨는지 확인</span></li></ol>
+            <div class="lines" data-chorus-chips></div>
+            <p class="note">자막은 AI가 아니라 내가 직접 넣어요.</p></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 2 · 3분</span><b>MP4로 내려받아 공유 폴더에</b><label class="ck"><input type="checkbox" data-k="p4.upShort">공유 폴더에 올렸어요</label></div>
+            <ol class="steps"><li><span>처음부터 끝까지 한 번 재생해 보기</span></li><li><span>오른쪽 위 <b>'공유'</b> → <b>'다운로드'</b> → 파일 형식 <b>MP4 동영상</b> → 다운로드</span></li><li><span>파일 이름 <button type="button" class="chip file" data-copy-show="fileShortBase"><span data-show="fileShort"></span></button> → 공유 폴더에 올리기</span></li></ol>
+            <p class="note">상영회에서 공유 폴더에서 골라 틀어요. 파일이 어디 갔는지 모르면 크롬 다운로드 아이콘 → 공유 폴더에 끌어다 놓기.</p></div>
+        </div>
+      </article>
+
+      <article class="card do tool-block" data-edit="cutter">
+        <div class="card-h"><span class="badge do">만들기 1 · 2 · 9분</span><h3>비디오 커터 · 자막 넣고 MP4로 저장</h3></div>
+        <div class="esteps">
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 1 · 6분</span><b>3단계 · 그림마다 가사 한 줄씩 자막</b><label class="ck"><input type="checkbox" data-k="p4.sub">끝났어요</label></div>
+            <ol class="steps"><li><span>위쪽 <b>'텍스트'</b> → 텍스트 추가</span></li><li><span>그림마다 그 장면의 가사 한 줄 · 크고 굵게, 그림을 가리지 않는 곳에</span></li><li><span>타임라인에서 그림 길이와 맞춰요</span></li></ol>
+            <div class="lines" data-chorus-chips></div>
+            <p class="note">자막은 AI가 아니라 내가 직접 넣어요.</p></div>
+          <div class="estep"><div class="estep-h"><span class="badge do">만들기 2 · 3분</span><b>4단계 · 저장하고 공유 폴더에</b><label class="ck"><input type="checkbox" data-k="p4.upShort">공유 폴더에 올렸어요</label></div>
+            <ol class="steps"><li><span>처음부터 끝까지 한 번 재생해 보기</span></li><li><span>오른쪽 위 <b>'저장'</b> → 형식 <b>MP4</b> → 저장 (만들어지는 데 1~2분)</span></li><li><span>파일 이름 <button type="button" class="chip file" data-copy-show="fileShortBase"><span data-show="fileShort"></span></button> → 공유 폴더에 올리기</span></li></ol>
+            <p class="warn"><b>저장이 끝날 때까지 탭을 닫지 않기.</b></p></div>
+        </div>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 3 · 2분 · 활동지 4교시 체크박스</span><h3>처음부터 끝까지 한 번 재생해 보기</h3></div>
+        <div class="checks col">
+          <label class="ck"><input type="checkbox" data-k="p4.f1">노래는 후렴만</label>
+          <label class="ck"><input type="checkbox" data-k="p4.f2">그림 4장이 가사에 맞춰 바뀌어요</label>
+          <label class="ck"><input type="checkbox" data-k="p4.f3">(움직임을 넣었다면) 움직임 확인</label>
+          <label class="ck"><input type="checkbox" data-k="p4.f4">자막 4줄</label>
+          <label class="ck"><input type="checkbox" data-k="p4.f5">30초 미만 · MP4 · 공유 폴더</label>
+        </div>
+        <p class="note">고칠 곳만 고치기 · 먼저 끝났다면 → 옆 친구 도우미 · 엔딩 자막 넣기</p>
+      </article>
+
+      <article class="card do">
+        <div class="card-h"><span class="badge do">만들기 4 · 3분</span><span class="tag">기법 9</span><h3>AI가 먼저 묻게 하기 · 내 숏폼 제목 정하기</h3></div>
+        <ol class="steps">
+          <li><span>맨 위 <b>제미나이</b> 링크 → 1교시 대화창에 아래 프롬프트 그대로 입력</span></li>
+          <li><span>AI의 질문 3개에 내 말로 답하기<small>예) 분위기 · 볼 사람 · 꼭 넣을 단어 → 신나고 웃긴 느낌! 우리 반 친구들 · '호랑이'</small></span></li>
+          <li><span>제목 후보 중 하나 고르기 · 마음에 안 들면 꼬리 질문 (기법 3)</span></li>
+          <li><span>상영회 때 제목으로 소개</span></li>
+        </ol>
+        <div class="prompt" data-p="title"></div>
+        <div class="chips"><span class="note">AI가 질문 없이 바로 제목을 주면</span><button type="button" class="chip" data-copy="제목은 아직 말고, 질문 3개만 먼저 해 줘">제목은 아직 말고, 질문 3개만 먼저 해 줘</button></div>
+        <div class="grid2">
+          <label class="field"><span>내 숏폼 제목</span><input type="text" id="p4-title" data-k="p4.title" placeholder="예) 호랑이가 시험을 끝냈다!" autocomplete="off"></label>
+          <label class="field"><span>한 줄 소개</span><input type="text" id="p4-intro" data-k="p4.intro" placeholder="예) 시험 끝난 날, 교실에 호랑이가 나타났다" autocomplete="off"></label>
+        </div>
+        <p class="tip">내가 빠뜨린 정보를 AI가 대신 찾아 줘요 · 받은 제목도 판정하고 골라요</p>
+      </article>
+
+      <article class="card do" id="c-p4k1">
+        <div class="card-h"><span class="badge do">연습 1 · 6분 · 활동지 1번 칸</span><h3>숏폼 상영 + 프롬프트 여정 발표</h3></div>
+        <ol class="steps">
+          <li><span>숏폼 30초 보기 (3편)</span></li>
+          <li><span>만든 사람 1분 발표 · 처음 프롬프트 → 고친 프롬프트 → 이유</span></li>
+          <li><span>친구들 한마디 · 좋았던 점 1개</span></li>
+          <li><span>나머지 학생 · 내 문장 틀 채우기</span></li>
+        </ol>
+        <div class="mini"><b>내 1~3교시 1번 칸 · 하나 골라 옮겨 써요</b>
+          <div class="hist">
+            <div class="h"><b>1교시 · 처음 → 고친 프롬프트</b><span data-show="h1" data-empty="(비어 있음)"></span></div>
+            <div class="h"><b>2교시 · 고친 가사 한 줄</b><span data-show="h2" data-empty="(비어 있음)"></span></div>
+            <div class="h"><b>3교시 · 장면 ③ / ④ 내 프롬프트</b><span data-show="h3" data-empty="(비어 있음)"></span></div>
+          </div>
+          <div class="row"><button type="button" class="btn sm" id="pullJourney">1교시 1번 칸에서 가져오기</button></div>
+        </div>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">1번 칸</span>프롬프트 여정 · 발표 문장 틀<span class="need" data-need="p4.j1 p4.j3"></span></div>
+          <div class="kan-b">
+            <div class="frame"><span>처음엔</span><input type="text" id="p4-j1" data-k="p4.j1" aria-label="처음 프롬프트" placeholder="처음 프롬프트" autocomplete="off"><span>라고 물었는데,</span></div>
+            <div class="frame"><input type="text" id="p4-j2" data-k="p4.j2" aria-label="아쉬운 점" placeholder="아쉬운 점" autocomplete="off"><span>이/가 아쉬워서</span></div>
+            <div class="chips"><button type="button" class="chip ins" data-fill="p4.j2" data-text="누구 이야기인지 모르는 것">누구 이야기인지 모르는 것</button><button type="button" class="chip ins" data-fill="p4.j2" data-text="분위기">분위기</button><button type="button" class="chip ins" data-fill="p4.j2" data-text="길이">길이</button></div>
+            <div class="frame"><input type="text" id="p4-j3" data-k="p4.j3" aria-label="바꾼 프롬프트" placeholder="바꾼 내용" autocomplete="off"><span>(으)로 바꿨더니</span></div>
+            <div class="frame"><input type="text" id="p4-j4" data-k="p4.j4" aria-label="달라진 것" placeholder="달라진 것" autocomplete="off"><span>이/가 달라졌어요.</span></div>
+            <div class="chips"><span class="note">1교시 결과 체크에서</span><button type="button" class="chip ins" data-fill="p4.j4" data-text="내 이야기">내 이야기</button><button type="button" class="chip ins" data-fill="p4.j4" data-text="분위기">분위기</button><button type="button" class="chip ins" data-fill="p4.j4" data-text="길이">길이</button></div>
+            <p class="sentence" data-show="journey" data-empty="칸을 채우면 발표할 문장이 여기에 완성돼요."></p>
+            <div class="row"><button type="button" class="btn sm" data-copy-show="journey">문장 복사</button></div>
+            <p class="example">선생님 예시 · 처음엔 <b>노래 가사 써 줘</b>라고 물었는데, 누구 이야기인지 몰라서 <b>시험 끝난 날 · 국악 힙합 · 4줄</b>로 바꿨더니 내 이야기 같은 가사가 나왔어요.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">같이 보기 · 3분</span><h3>이 숏폼은 누구 것일까?</h3></div>
+        <div class="who-grid">
+          <div class="who-col me"><b class="h">내가 한 일 · 고르고 · 고치고 · 배열하고 · 편집한 것</b>
+            <ul><li>곡 주제 고르기 <span class="note" data-show="topicQ"></span></li><li>가사 한 줄 고치기 <span class="note" data-show="afterQ"></span></li><li>장면 고르기 · 배열</li><li>자막 · 편집</li></ul></div>
+          <div class="who-col ai"><b class="h">AI가 한 일</b>
+            <ul><li>가사 초안</li><li>그림 4장</li><li>노래 (멜로디 · 목소리 · 반주)</li></ul></div>
+        </div>
+        <p class="tip"><b>저작권은 내가 창작적으로 기여한 부분에만 생겨요.</b></p>
+        <div class="tbl-wrap"><table class="tbl">
+          <thead><tr><th>우리나라 기준 (한국저작권위원회 · 문화체육관광부 안내)</th><th>저작권</th></tr></thead>
+          <tbody><tr><td>AI 혼자 만든 것 ('산출물')</td><td>인정되지 않아요</td></tr><tr><td>사람이 창작적으로 기여한 부분</td><td>그 부분은 인정돼요</td></tr><tr><td>우리 숏폼이라면</td><td>고친 가사 · 장면 배열 · 자막과 편집</td></tr></tbody>
+        </table></div>
+        <details class="more"><summary>상황 카드 7장 · 해도 될까? (선생님과 같이 보기)</summary><div>
+          <p class="note">한 장씩 읽으면 손으로 O / X / 조건부 O를 표시해요. 근거는 '왜 그런지 한마디'.</p>
+          <div class="cards7">
+            <div class="card7"><b>사례</b>미국 음반사들이 "허락 없이 우리 노래로 학습했다"며 AI 음악 회사를 고소했어요. AI 회사의 잘못일까?</div>
+            <div class="card7"><b>유튜브</b>완성한 숏폼을 내 유튜브 채널에 올린다</div>
+            <div class="card7"><b>상황 1</b>친구 얼굴 사진을 내 숏폼에 넣는다</div>
+            <div class="card7"><b>상황 2</b>"유명 게임 음악이랑 똑같이" 만들어 달라고 한다</div>
+            <div class="card7"><b>상황 3</b>친구에게 "이거 내가 다 만들었어"라고 말한다</div>
+            <div class="card7"><b>상황 4</b>그림 AI가 한쪽 모습만 그려도 그냥 쓴다</div>
+            <div class="card7"><b>상황 5</b>AI로 만든 노래로 교내 대회에 나간다</div>
+          </div>
+        </div></details>
+      </article>
+
+      <article class="card do" id="c-p4k2">
+        <div class="card-h"><span class="badge do">연습 2 · 4분 · 활동지 2번 칸</span><h3>나의 AI 활용 헌장</h3></div>
+        <ol class="steps">
+          <li><span>세 칸에서 보기 하나씩 고르기</span></li>
+          <li><span>그중 한 줄은 내 말로 고쳐 쓰기</span></li>
+        </ol>
+        <div class="kan">
+          <div class="kan-h"><span class="kan-n">2번 칸</span>나의 AI 활용 헌장<span class="need" data-need="@charter"></span></div>
+          <div class="kan-b charter">
+            <div class="crow"><div class="ch-h">만들 때 나는</div><div class="ch-b">
+              <div class="chips"><button type="button" class="chip ins" data-fill="p4.c1" data-text="AI 결과에 내가 고친 부분을 꼭 남긴다">AI 결과에 내가 고친 부분을 꼭 남긴다</button><button type="button" class="chip ins" data-fill="p4.c1" data-text="한 번에 끝내지 않고 다시 묻는다">한 번에 끝내지 않고 다시 묻는다</button><button type="button" class="chip ins" data-fill="p4.c1" data-text="사실은 검색으로 확인한다">사실은 검색으로 확인한다</button></div>
+              <input type="text" id="p4-c1" data-k="p4.c1" aria-label="만들 때 나는" placeholder="보기를 누르거나 내 말로 써요" autocomplete="off"><span class="own" data-own="p4.c1"></span></div></div>
+            <div class="crow"><div class="ch-h">올릴 때 나는</div><div class="ch-b">
+              <div class="chips"><button type="button" class="chip ins" data-fill="p4.c2" data-text="AI로 만들었다고 밝힌다">AI로 만들었다고 밝힌다</button><button type="button" class="chip ins" data-fill="p4.c2" data-text="약관과 학교 규칙을 먼저 본다">약관과 학교 규칙을 먼저 본다</button><button type="button" class="chip ins" data-fill="p4.c2" data-text="&quot;다 내가 만들었다&quot;고 하지 않는다">"다 내가 만들었다"고 하지 않는다</button></div>
+              <input type="text" id="p4-c2" data-k="p4.c2" aria-label="올릴 때 나는" placeholder="보기를 누르거나 내 말로 써요" autocomplete="off"><span class="own" data-own="p4.c2"></span></div></div>
+            <div class="crow"><div class="ch-h">다른 사람의 것은</div><div class="ch-b">
+              <div class="chips"><button type="button" class="chip ins" data-fill="p4.c3" data-text="친구 얼굴 · 목소리는 허락받고 쓴다">친구 얼굴 · 목소리는 허락받고 쓴다</button><button type="button" class="chip ins" data-fill="p4.c3" data-text="남의 작품을 따라 해 달라고 하지 않는다">남의 작품을 따라 해 달라고 하지 않는다</button><button type="button" class="chip ins" data-fill="p4.c3" data-text="친구 이름을 장난으로 넣지 않는다">친구 이름을 장난으로 넣지 않는다</button></div>
+              <input type="text" id="p4-c3" data-k="p4.c3" aria-label="다른 사람의 것은" placeholder="보기를 누르거나 내 말로 써요" autocomplete="off"><span class="own" data-own="p4.c3"></span></div></div>
+            <p class="note" id="ownCount"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-h"><span class="badge see">마지막 한 문장</span><h3>나의 질문 선언</h3></div>
+        <div class="frame"><span>나는 AI에게</span><input type="text" id="p4-declare" data-k="p4.declare" aria-label="어떻게 묻는 사람" placeholder="예) 끝까지 다시" autocomplete="off"><span>하게 묻는 사람이다.</span></div>
+      </article>
+
+      <article class="card" id="c-save">
+        <div class="card-h"><span class="badge follow">마치기 전에</span><h3>활동지를 저장하고 정리해요</h3></div>
+        <div class="row">
+          <button type="button" class="btn" id="dlBtn">내 활동지 파일로 받기</button>
+          <button type="button" class="btn ghost" id="copyAllBtn">전체 내용 복사</button>
+        </div>
+        <p class="note" id="dlNote">받은 파일(.txt)은 공유 폴더 내 이름 폴더에 올려 두면 선생님도 볼 수 있어요.</p>
+        <div class="checks col">
+          <label class="ck"><input type="checkbox" data-k="p4.e1">숏폼 MP4가 공유 폴더에 있어요</label>
+          <label class="ck"><input type="checkbox" data-k="p4.e2">활동지 2번 칸을 다 채웠어요</label>
+          <label class="ck"><input type="checkbox" data-k="p4.e3">개인 계정으로 로그인한 Canva · 커터 · 제미나이 · Suno 로그아웃</label>
+          <label class="ck"><input type="checkbox" data-k="p4.e4">교육용 계정도 로그아웃</label>
+          <label class="ck"><input type="checkbox" data-k="p4.e5">ID 카드 반납 <small>(받은 사람만)</small></label>
+          <label class="ck"><input type="checkbox" data-k="p4.e6">크롬북 덮고 정리</label>
+        </div>
+        <div class="row"><button type="button" class="btn ghost sm" id="wipeBtn">이 크롬북에서 내 활동지 지우기</button><span class="note">파일로 받은 뒤에 눌러요</span></div>
+      </article>
+    </div>
+    <div class="panel-foot">
+      <p class="method"><b>4교시 동안 기법 9가지 ✓</b> · AI를 많이 쓴 사람보다, 잘 묻고 잘 고친 사람이 되어 봅시다</p>
+    </div>
+  </section>
+
+  <details class="teacher" id="teacher">
+    <summary>선생님용 · 반 설정</summary>
+    <div class="stack">
+      <p class="note">우리 반 노래 · 편집 도구와 공유 폴더 주소를 정하면, 학생 화면에는 그 도구만 보여요. '반별 링크 만들기'로 만든 주소를 buly.kr 짧은 주소에 연결하면 학생은 설정된 활동지를 열어요. 이 기기에만 적용하려면 '이 기기에 적용'.</p>
+      <div class="tgrid">
+        <label class="field"><span>반</span><input type="text" id="t-ban" placeholder="예) 2" autocomplete="off"></label>
+        <label class="field"><span>노래 도구</span><select id="t-song"><option value="choose">학생이 고름</option><option value="gemini">제미나이</option><option value="suno">Suno</option></select></label>
+        <label class="field"><span>편집 도구</span><select id="t-edit"><option value="choose">학생이 고름</option><option value="canva">Canva</option><option value="cutter">비디오 커터</option></select></label>
+        <span></span>
+        <label class="field wide"><span>공유 폴더 주소 (구글 드라이브)</span><input type="text" id="t-folder" placeholder="https://drive.google.com/drive/folders/…" autocomplete="off"></label>
+        <label class="field wide"><span>'샘플 음악' 다운로드 주소</span><input type="text" id="t-sample" placeholder="https://drive.google.com/…" autocomplete="off"></label>
+      </div>
+      <div class="row">
+        <button type="button" class="btn" id="tApply">이 기기에 적용</button>
+        <button type="button" class="btn ghost" id="tLink">반별 링크 만들기</button>
+        <button type="button" class="btn ghost" id="tRestore">지운 활동지 되살리기</button>
+      </div>
+      <label class="field" id="tOutWrap" hidden><span>반별 링크</span><input type="text" id="tOut" class="mono" readonly></label>
+      <p class="note">반별 링크는 이 HTML 파일을 웹에 올려 둔 주소에서 만들어야 해요. 도구만 바꿀 때는 주소 끝에 #suno-canva, #gemini-cutter처럼 붙여도 돼요.</p>
+    </div>
+  </details>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+/* ======================= 선생님이 고치는 곳 =======================
+   반별 링크(?song=…&edit=…&folder=…)나 '선생님용 · 반 설정'이 있으면 그쪽이 먼저예요. */
+var CONFIG = {
+  ban: '',               // 예: '2'  → 공유 폴더 이름 옆에 "3학년 2반"
+  song: 'choose',        // 'gemini' | 'suno' | 'choose'(학생이 고름)
+  edit: 'choose',        // 'canva'  | 'cutter' | 'choose'
+  links: {
+    gemini: 'https://gemini.google.com/app',
+    suno:   'https://suno.com',
+    canva:  'https://www.canva.com/',
+    cutter: 'https://online-video-cutter.com/ko/video-editor',
+    folder: '',          // 우리 반 공유 폴더(구글 드라이브) 주소
+    sample: ''           // '샘플 음악' 다운로드 주소
+  }
+};
+/* ================================================================== */
+
+var KEY = 'kkc-ai-camp-worksheet-v1', TKEY = KEY + '-teacher', PKEY = KEY + '-prev';
+function lsGet(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); return true; } catch(e){ return false; } }
+function parse(s){ try { var o = JSON.parse(s || '{}'); return (o && typeof o === 'object') ? o : {}; } catch(e){ return {}; } }
+var S = parse(lsGet(KEY));
+var T = parse(lsGet(TKEY));
+var $ = function(sel, root){ return (root || document).querySelector(sel); };
+var $$ = function(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function val(k){ var v = S[k]; return (typeof v === 'string') ? v.trim() : v; }
+
+/* ---------- 반 설정: 주소 ?song= &edit= &folder= &sample= &ban= &t= , #p2-suno-canva ---------- */
+var Q; try { Q = new URLSearchParams(location.search); } catch(e){ Q = { get: function(){ return null; } }; }
+var H = (location.hash || '').slice(1).toLowerCase().split('-').filter(Boolean);
+function pick(name, allowed){
+  var q = Q.get(name); if (q && allowed.indexOf(q) > -1) return q;
+  for (var i = 0; i < H.length; i++) if (allowed.indexOf(H[i]) > -1) return H[i];
+  if (T[name] && allowed.indexOf(T[name]) > -1) return T[name];
+  return CONFIG[name];
+}
+var C = {
+  song: pick('song', ['gemini','suno','choose']),
+  edit: pick('edit', ['canva','cutter','choose']),
+  folder: Q.get('folder') || T.folder || CONFIG.links.folder,
+  sample: Q.get('sample') || T.sample || CONFIG.links.sample,
+  ban: Q.get('ban') || T.ban || CONFIG.ban
+};
+if (C.ban && !val('id.ban')) S['id.ban'] = String(C.ban);
+
+/* ---------- 테마 · 기법 ---------- */
+var THEMES = {
+  joseon: { name:'조선 힙합', genre:'국악 힙합', art:'민화풍, 한지 질감, 단청 색감', suno:'국악 힙합, 가야금, 북, 떼창 후렴, 한국어 남자 보컬' },
+  game:   { name:'게임 음악', genre:'8비트 칩튠', art:'16비트 픽셀 아트, 레트로 화면', suno:'8비트 칩튠, 보스전 배경음악, 빠른 템포, 한국어 보컬' },
+  anime:  { name:'애니 음악', genre:'애니 오프닝풍 록', art:'셀 애니메이션, 선명한 외곽선', suno:'애니 오프닝풍 록, 밴드 사운드, 벅찬 후렴, 한국어 보컬' },
+  free:   { name:'자율 테마', genre:'', art:'', suno:'' }
+};
+var TECH = ['세 칸 채우기','모르면 모른다고 하게 하기','꼬리 질문','역할 주기','형식 지정','한 가지만 바꾸기','예시 주기','금지 조건','AI가 먼저 묻게 하기'];
+var TECH_P = [1,1,1,2,2,2,3,3,4];
+function themeKey(){ return THEMES[S['p1.theme']] ? S['p1.theme'] : ''; }
+function themeName(){ var k = themeKey(); if (!k) return ''; if (k === 'free') return '자율 테마' + (val('p1.themeFree') ? ' · ' + val('p1.themeFree') : ''); return THEMES[k].name; }
+function themeGenre(){ var k = themeKey(); if (!k) return ''; return k === 'free' ? (val('p1.themeFree') || '') : THEMES[k].genre; }
+function themeArt(){ var k = themeKey(); return (k && k !== 'free') ? THEMES[k].art : ''; }
+function themeSuno(){ var k = themeKey(); if (!k) return ''; return k === 'free' ? (val('p1.themeFree') || '') : THEMES[k].suno; }
+
+/* ---------- 프롬프트 주황 칸 ---------- */
+var SLOTS = {
+  me:        { label:'나', def:'중학교 3학년 남학생' },
+  genre:     { label:'장르', def:'국악 힙합', link: themeGenre },
+  story:     { label:'주제 방향', def:'요즘 내 이야기' },
+  pick:      { label:'고른 번호', def:'3번' },
+  role:      { label:'역할', def:'중학생 마음을 잘 아는 국악 힙합 작사가', link: function(){ return '중학생 마음을 잘 아는 ' + slotVal('genre') + ' 작사가'; } },
+  ltopic:    { label:'주제', def:"'시험 끝난 날'의 해방감", link: function(){ return val('p1.topic') ? "'" + val('p1.topic') + "'" : ''; } },
+  lineNo:    { label:'몇 번째 줄', def:'3' },
+  newLine:   { label:'내가 고친 줄', def:'가방 던지고 운동장으로 뛰어', link: function(){ return val('p2.after') || ''; } },
+  songFeel:  { label:'노래 느낌', def:'신나는 국악 힙합', link: function(){ return '신나는 ' + slotVal('genre'); } },
+  chorusFeel:{ label:'후렴 설명', def:'다 같이 떼창하는 느낌으로' },
+  sunoStyle: { label:'노래 느낌', def:'국악 힙합, 가야금, 북, 떼창 후렴, 한국어 남자 보컬', link: themeSuno },
+  songTitle: { label:'제목', def:'시험 끝난 날', link: function(){ return val('p1.topic') || ''; } },
+  sceneNo:   { label:'장면 번호', def:'2' },
+  sceneHow:  { label:'어떻게', def:'더 신나게' },
+  artstyle:  { label:'그림체', def:'민화풍, 한지 질감, 단청 색감', link: themeArt },
+  hero:      { label:'주인공 생김새', def:'주황색 줄무늬에 파란 갓을 쓴 통통한 호랑이' },
+  heroShort: { label:'주인공 (짧게)', def:'호랑이' },
+  scene2:    { label:'장면 ② 내용', def:'교복을 입은 채 친구들과 운동장이나 복도를 뛰어다니며 손뼉을 치거나, 흥겹게 어깨춤을 추는 트렌디한 댄스 챌린지 컷', link: function(){ return val('p2.sc2') || ''; } }
+};
+function slotLinked(k){ var s = SLOTS[k]; var l = s.link ? String(s.link() || '').trim() : ''; return l || s.def; }
+function slotVal(k){ var own = String(S['slot.' + k] || '').trim(); return own || slotLinked(k); }
+
+var PROMPTS = {
+  trip:      { where:'제미나이 입력창에 그대로', tpl:'중3인 내가 부모님과 부산 2박 3일, 활동 많은 일정 짜 줘' },
+  lunch:     { where:'예시 · 막히면 · 주제는 내 이야기로', tpl:"'급식에 치킨 나온 날'을 주제로, 신나는 랩으로, 4줄만 써 줘" },
+  sejong:    { where:'제미나이 입력창에 그대로', tpl:'세종대왕의 맥북프로 던짐 사건에 대해 알려 줘.' },
+  artist1:   { where:'① 첫 질문 · 예시', tpl:'나는 {{me}}(이야/야). {{genre}} 노래를 만들 건데, {{story}}(으로/로) 곡 주제 5개를 추천해 줘.' },
+  artist2:   { where:'② 꼬리 질문 · 주황 글자만 내가 고른 번호로', tpl:'{{pick}} 주제로 할게. 어울리는 아티스트 이름 5개 지어 줘. 짧고 부르기 쉽게.' },
+  lyric:     { where:'1교시 대화창에 · 선생님 예시', tpl:'너는 {{role}}(이야/야). {{ltopic}}(을/를) 주제로 신나는 가사를 써 줘. 벌스 앞에 [Verse], 후렴 앞에 [Chorus]를 붙이고 벌스 4줄 + 후렴 4줄로.' },
+  oneLine:   { where:'같은 대화창에 · 기법 6', tpl:"{{lineNo}}번째 줄을 '{{newLine}}'(으로/로) 바꿔서 전체 다시 보여 줘" },
+  gsong:     { where:'음악 만들기 입력창에 · 가사는 2교시 1번 칸에서', tpl:'아래 가사로 {{songFeel}} 노래를 만들어 줘. 후렴은 {{chorusFeel}}.\n\n{{lyrics}}' },
+  sunoLyrics:{ where:'Suno 가사 칸 (Lyrics) · 2교시 1번 칸의 완성 가사', tpl:'{{lyrics}}' },
+  sunoStyle: { where:'Suno 노래 느낌 칸 (Styles)', tpl:'{{sunoStyle}}' },
+  sunoTitle: { where:'Suno 제목 칸 (Title)', tpl:'{{songTitle}}' },
+  scenes:    { where:'가사 만든 대화창에 · 꼬리 질문', tpl:'내 후렴 4줄을 숏폼 장면 4개로 나눠 줘. 후렴 한 줄에 장면 하나씩, 노래 분위기에 맞게 한 줄로.' },
+  sceneFix:  { where:'노래 분위기와 안 맞는 장면만 · 꼬리 질문', tpl:'{{sceneNo}}번 장면을 {{sceneHow}} 바꿔 줘' },
+  first:     { where:'같은 대화창에 · 주황 칸만 내 것으로', tpl:"지금부터 숏폼 장면 4장을 그릴 거야. 모든 장면은 '{{artstyle}}, 세로 화면, 글자 없이'로 통일해 줘. 주인공은 '{{hero}}'(으로/로), 모든 장면에서 똑같이 그려 줘. 첫 번째 장면부터 그려 줘." },
+  firstFix:  { where:'마음에 안 들면 · 꼬리 프롬프트', tpl:'앞 그림과 같은 화풍으로, {{heroShort}}(을/를) 더 귀엽게, 표정은 웃게 바꿔 줘' },
+  scene2:    { where:'지난 대화창에 · 장면 ② 예시', tpl:"앞 그림과 똑같은 화풍, 똑같은 {{heroShort}}(으로/로) 두 번째 장면을 그려 줘. '{{scene2}}'. 글자는 넣지 마. 실사 사진처럼 그리지 마." },
+  scene3alt: { where:'막힐 때 · 장면 ③ 예', tpl:'첫 번째 그림처럼 같은 화풍 · 같은 {{heroShort}}(으로/로), 궁궐 앞마당에서 친구들과 떼창하는 장면을 세로 화면으로 그려 줘. 글자는 넣지 마.' },
+  fixStyle:  { where:'꼬리 프롬프트 · 기법 3 + 7', tpl:'첫 번째 그림과 똑같은 화풍으로 다시 그려 줘' },
+  fixHero:   { where:'꼬리 프롬프트 · 기법 3 + 7', tpl:'주인공은 {{hero}}(이야/야). 앞 그림처럼 다시 그려 줘' },
+  fixText:   { where:'꼬리 프롬프트 · 기법 3 + 8', tpl:'앞 그림과 똑같이, 글자만 모두 빼고 다시 그려 줘' },
+  title:     { where:'1교시 대화창에 · 그대로 입력', tpl:'내 숏폼의 제목과 한 줄 소개를 만들어 줘. 그 전에, 좋은 제목을 만들려면 나에게 필요한 질문 3개를 먼저 해 줘.' }
+};
+
+/* 조사: 앞 글자 받침에 맞춰 을/를 · 이/가 · (이)야 · (으)로 */
+var JOSA = { '을/를':['을','를'], '이/가':['이','가'], '은/는':['은','는'], '과/와':['과','와'], '이야/야':['이야','야'], '으로/로':['으로','로'] };
+function jong(s){
+  for (var i = s.length - 1; i >= 0; i--){
+    var ch = s.charAt(i), c = s.charCodeAt(i);
+    if (c >= 0xAC00 && c <= 0xD7A3){ var j = (c - 0xAC00) % 28; return { has: j !== 0, rieul: j === 8 }; }
+    if (ch >= '0' && ch <= '9') return { has: '0136789'.indexOf(ch) > -1, rieul: '178'.indexOf(ch) > -1 };
+    if (/[A-Za-z]/.test(ch)) return { has:false, rieul:false };
+  }
+  return { has:false, rieul:false };
+}
+function josa(prev, pair){ var p = JOSA[pair], j = jong(prev); if (pair === '으로/로') return (j.has && !j.rieul) ? p[0] : p[1]; return j.has ? p[0] : p[1]; }
+var TOK = /(\{\{\w+\}\}|\((?:을\/를|이\/가|은\/는|과\/와|이야\/야|으로\/로)\))/;
+function compose(tpl){
+  var parts = tpl.split(TOK), text = '', html = '', missing = false;
+  parts.forEach(function(p){
+    if (!p) return;
+    var m = p.match(/^\{\{(\w+)\}\}$/);
+    if (m){
+      if (m[1] === 'lyrics'){
+        var ly = String(S['p2.lyrics'] || '').trim();
+        if (ly){ text += ly; html += '<span class="slot slot-block">' + esc(ly) + '</span>'; }
+        else { missing = true; html += '<span class="slot slot-block empty">2교시 1번 칸에 완성 가사를 붙여넣으면 여기에 들어가요</span>'; }
+        return;
+      }
+      var v = slotVal(m[1]); text += v; html += '<mark class="slot">' + esc(v) + '</mark>'; return;
+    }
+    m = p.match(/^\((.+)\)$/);
+    if (m && JOSA[m[1]]){ var jj = josa(text, m[1]); text += jj; html += esc(jj); return; }
+    text += p; html += esc(p);
+  });
+  return { text: text.replace(/\s+$/,''), html: html, missing: missing };
+}
+var ICON_SPARK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2c.6 5.3 4.7 9.4 10 10-5.3.6-9.4 4.7-10 10-.6-5.3-4.7-9.4-10-10 5.3-.6 9.4-4.7 10-10z"/></svg>';
+function buildPrompts(){
+  $$('.prompt[data-p]').forEach(function(box){
+    var P = PROMPTS[box.dataset.p]; if (!P) return;
+    var keys = [], re = /\{\{(\w+)\}\}/g, m;
+    while ((m = re.exec(P.tpl))) if (m[1] !== 'lyrics' && keys.indexOf(m[1]) < 0) keys.push(m[1]);
+    var showSlots = keys.length && !box.hasAttribute('data-noslots');
+    box.innerHTML = '<div class="prompt-h"><span class="where">' + ICON_SPARK + esc(box.dataset.where || P.where) + '</span><button type="button" class="copy" data-copy-p="' + box.dataset.p + '">복사</button></div>' +
+      '<div class="prompt-t"></div>' +
+      (showSlots ? '<div class="slots"><span class="slots-l">주황 칸을 내 것으로 바꾸기 · 비워 두면 예시 그대로</span>' +
+        keys.map(function(k){ return '<label>' + esc(SLOTS[k].label) + '<input type="text" id="slot-' + box.dataset.p + '-' + k + (seen[box.dataset.p] ? '-' + seen[box.dataset.p] : '') + '" data-slot="' + k + '" autocomplete="off"></label>'; }).join('') + '</div>' : '');
+    seen[box.dataset.p] = (seen[box.dataset.p] || 0) + 1;
+  });
+}
+var seen = {};
+function updatePrompts(){
+  $$('.prompt[data-p]').forEach(function(box){
+    var P = PROMPTS[box.dataset.p]; if (!P) return;
+    box.querySelector('.prompt-t').innerHTML = compose(P.tpl).html;
+  });
+  $$('input[data-slot]').forEach(function(inp){
+    var k = inp.dataset.slot;
+    if (document.activeElement !== inp) inp.value = S['slot.' + k] || '';
+    inp.placeholder = slotLinked(k);
+  });
+}
+
+/* ---------- 계산해서 보여 주는 값 ---------- */
+function secs(m, s){ if ((m == null || m === '') && (s == null || s === '')) return null; return (parseInt(m || '0', 10) || 0) * 60 + (parseInt(s || '0', 10) || 0); }
+function mmss(x){ return Math.floor(x / 60) + ':' + ('0' + (x % 60)).slice(-2); }
+function chorusRange(){ return { a: secs(S['p2.cs_m'], S['p2.cs_s']), b: secs(S['p2.ce_m'], S['p2.ce_s']) }; }
+function chorusLines(){
+  var lines = String(S['p2.lyrics'] || '').split(/\r?\n/), out = [], on = false;
+  for (var i = 0; i < lines.length; i++){
+    var l = lines[i].trim(), tag = l.match(/^\[([^\]]+)\]\s*(.*)$/);
+    if (tag){ if (on && out.length) break; on = /chorus|후렴/i.test(tag[1]); if (on && tag[2]) out.push(tag[2]); continue; }
+    if (on && l) out.push(l);
+    if (out.length >= 4) break;
+  }
+  return out.slice(0, 4);
+}
+function fileBase(){ return (val('p1.artist') || '').replace(/[\\\/:*?"<>|]+/g, '') || '아티스트이름'; }
+function withJosa(word, pair){ return word + josa(word, pair); }
+var D = {
+  whoLine: function(){ var b = val('id.ban'), n = val('id.no'), nm = val('id.name'); return (b || n || nm) ? ('3학년 ' + (b || '_') + '반 ' + (n || '_') + '번 ' + (nm || '')).trim() : '반 · 번호 · 이름 쓰기'; },
+  folderName: function(){ return C.ban ? '공유 폴더 · 3학년 ' + C.ban + '반' : '공유 폴더'; },
+  themeName: themeName,
+  artist: function(){ return val('p1.artist') || ''; },
+  topic: function(){ return val('p1.topic') || ''; },
+  topicQ: function(){ return val('p1.topic') ? '· ' + val('p1.topic') : ''; },
+  afterQ: function(){ return val('p2.after') ? "· '" + val('p2.after') + "'" : ''; },
+  fileSong: function(){ return fileBase() + '_노래'; },
+  fileShort: function(){ return fileBase() + '_숏폼.mp4'; },
+  fileShortBase: function(){ return fileBase() + '_숏폼'; },
+  chorusTime: function(){ var r = chorusRange(); if (r.a == null || r.b == null) return ''; var t = mmss(r.a) + ' ~ ' + mmss(r.b) + (r.b > r.a ? ' · 약 ' + (r.b - r.a) + '초' : ''); return t + (S['p2.sample'] ? ' · 샘플' : ''); },
+  ch1: function(){ return chorusLines()[0] || '가사 1줄'; }, ch2: function(){ return chorusLines()[1] || '가사 2줄'; },
+  ch3: function(){ return chorusLines()[2] || '가사 3줄'; }, ch4: function(){ return chorusLines()[3] || '가사 4줄'; },
+  sc3: function(){ return val('p2.sc3') || ''; }, sc4: function(){ return val('p2.sc4') || ''; },
+  h1: function(){ var a = val('p1.first'), b = val('p1.fixed'); return (a || b) ? (a || '…') + '  →  ' + (b || '…') : ''; },
+  h2: function(){ var a = val('p2.before'), b = val('p2.after'); return (a || b) ? (a || '…') + '  →  ' + (b || '…') : ''; },
+  h3: function(){ return val('p3.myPrompt') || ''; },
+  journey: function(){
+    var a = val('p4.j1'), b = val('p4.j2'), c = val('p4.j3'), d = val('p4.j4');
+    if (!a && !b && !c && !d) return '';
+    return '처음엔 ' + (a || '____') + '라고 물었는데, ' + (b ? withJosa(b, '이/가') : '____가') + ' 아쉬워서 ' + (c ? withJosa(c, '으로/로') : '____로') + ' 바꿨더니 ' + (d ? withJosa(d, '이/가') : '____가') + ' 달라졌어요.';
+  }
+};
+var VIRT = {
+  '@chorus': function(){ var r = chorusRange(); return r.a != null && r.b != null; },
+  '@charter': function(){ return !!(val('p4.c1') && val('p4.c2') && val('p4.c3')); }
+};
+function filled(k){ if (VIRT[k]) return VIRT[k](); var v = S[k]; return (typeof v === 'string') ? v.trim() !== '' : !!v; }
+var TAB_NEEDS = {
+  p1: ['p1.first p1.fixed', 'p1.artist p1.topic'],
+  p2: ['p2.before p2.after', '@chorus'],
+  p3: ['p3.myPrompt'],
+  p4: ['p4.j1 p4.j3', '@charter']
+};
+var CHARTER = {
+  'p4.c1': ['AI 결과에 내가 고친 부분을 꼭 남긴다','한 번에 끝내지 않고 다시 묻는다','사실은 검색으로 확인한다'],
+  'p4.c2': ['AI로 만들었다고 밝힌다','약관과 학교 규칙을 먼저 본다','"다 내가 만들었다"고 하지 않는다'],
+  'p4.c3': ['친구 얼굴 · 목소리는 허락받고 쓴다','남의 작품을 따라 해 달라고 하지 않는다','친구 이름을 장난으로 넣지 않는다']
+};
+function isOwn(k){ var v = val(k); return !!v && CHARTER[k].indexOf(v) < 0; }
+
+/* ---------- 화면 갱신 ---------- */
+function songMode(){ return C.song === 'choose' ? (S.songChoice || 'unset') : C.song; }
+function editMode(){ return C.edit === 'choose' ? (S.editChoice || 'unset') : C.edit; }
+function refresh(){
+  document.body.setAttribute('data-songmode', songMode());
+  document.body.setAttribute('data-editmode', editMode());
+  $$('[data-song]').forEach(function(el){ var m = songMode(); el.hidden = !(m === 'unset' ? !el.classList.contains('tool-block') : el.dataset.song === m); });
+  $$('[data-edit]').forEach(function(el){ var m = editMode(); el.hidden = !(m === 'unset' ? !el.classList.contains('tool-block') : el.dataset.edit === m); });
+  $$('[data-chooser="song"]').forEach(function(el){ el.hidden = C.song !== 'choose'; });
+  $$('[data-chooser="edit"]').forEach(function(el){ el.hidden = C.edit !== 'choose'; });
+
+  $$('[data-show]').forEach(function(el){
+    var f = D[el.dataset.show]; var v = f ? f() : '';
+    if (!v && el.dataset.empty){ el.textContent = el.dataset.empty; el.classList.add('empty'); }
+    else { el.textContent = v; el.classList.remove('empty'); }
+  });
+  var who = $('#whoChip'); who.classList.toggle('empty', !(val('id.name')));
+  updatePrompts();
+
+  $$('[data-need]').forEach(function(el){
+    var ok = el.dataset.need.split(' ').every(filled);
+    el.classList.toggle('ok', ok); el.textContent = ok ? '채웠어요 ✓' : '아직';
+  });
+  Object.keys(TAB_NEEDS).forEach(function(p){
+    var list = TAB_NEEDS[p], done = list.filter(function(g){ return g.split(' ').every(filled); }).length;
+    var el = $('[data-count="' + p + '"]'); el.textContent = '칸 ' + done + '/' + list.length; el.classList.toggle('ok', done === list.length);
+  });
+
+  $('#freeWrap').hidden = S['p1.theme'] !== 'free';
+  var tk = themeKey();
+  $$('#genreTbl tr[data-theme-row]').forEach(function(tr){ tr.classList.toggle('me', tr.dataset.themeRow === tk); });
+
+  var r = chorusRange(), w = $('#chorusWarn');
+  if (r.a != null && r.b != null && r.b <= r.a){ w.hidden = false; w.innerHTML = '<b>끝 시간이 시작보다 빨라요.</b> 다시 확인해요.'; }
+  else if (r.a != null && r.b != null && r.b - r.a > 30){ w.hidden = false; w.innerHTML = '<b>' + (r.b - r.a) + '초 · 30초를 넘어요.</b> 괜찮아요, 3교시에 앞뒤를 잘라 30초 미만으로 맞춰요.'; }
+  else w.hidden = true;
+
+  var ch = chorusLines();
+  $$('[data-chorus-list]').forEach(function(ol){ ol.innerHTML = ch.map(function(l){ return '<li>' + esc(l) + '</li>'; }).join(''); });
+  $$('[data-chorus-empty]').forEach(function(p){ p.hidden = ch.length > 0; });
+  $$('[data-chorus-chips]').forEach(function(box){
+    box.innerHTML = ch.length ? ch.map(function(l, i){ return '<button type="button" class="chip" data-copy="' + esc(l) + '"><span><b>' + (i + 1) + '</b> · ' + esc(l) + '</span></button>'; }).join('')
+      : '<p class="note">2교시 1번 칸에 완성 가사를 붙여넣으면 후렴 4줄이 여기에 나와요 (한 줄씩 복사).</p>';
+  });
+
+  $$('[data-tries]').forEach(function(t){
+    var max = +t.dataset.max, used = Math.min(max, +S[t.dataset.tries] || 0);
+    $('.dots', t).innerHTML = Array.apply(null, Array(max)).map(function(_, i){ return '<i class="' + (i < used ? 'on' : '') + '"></i>'; }).join('');
+    $('.tries-s', t).textContent = used >= max ? '다 썼어요 · 만든 곡 중에서 골라요' : '남은 기회 ' + (max - used) + '번';
+    t.classList.toggle('out', used >= max);
+  });
+
+  var own = 0;
+  $$('[data-own]').forEach(function(el){ var k = el.dataset.own, o = isOwn(k); if (o) own++; el.classList.toggle('ok', o); el.textContent = o ? '내 말로 쓴 줄 ✓' : (val(k) ? '보기 그대로' : ''); });
+  $('#ownCount').textContent = own ? '내 말로 고친 줄 ' + own + '개 ✓' : '세 줄 중 한 줄은 내 말로 고쳐 써요.';
+}
+
+/* ---------- 저장 ---------- */
+var saveTimer = null, savedEl = $('#saved');
+function fmtTime(t){ var d = new Date(t); return d.getHours() + ':' + ('0' + d.getMinutes()).slice(-2); }
+function fmtDate(t){ var d = new Date(t); return (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + fmtTime(t); }
+function save(){
+  S._savedAt = Date.now();
+  var ok = lsSet(KEY, JSON.stringify(S));
+  savedEl.textContent = ok ? '자동 저장됨 · ' + fmtTime(S._savedAt) : '이 브라우저에는 저장이 안 돼요 · 탭을 닫지 마세요';
+  savedEl.classList.toggle('bad', !ok);
+}
+function changed(){ clearTimeout(saveTimer); saveTimer = setTimeout(save, 350); refresh(); }
+
+/* ---------- 입력 연결 ---------- */
+function bindAll(){
+  $$('[data-k]').forEach(function(el){
+    var k = el.dataset.k;
+    if (!el.id) el.id = 'f-' + k.replace(/[^a-z0-9]+/gi, '-') + (el.type === 'radio' ? '-' + el.value : '');
+    if (el.type === 'checkbox') el.checked = !!S[k];
+    else if (el.type === 'radio') el.checked = (S[k] === el.value);
+    else el.value = (S[k] == null ? '' : S[k]);
+  });
+}
+function onField(e){
+  var el = e.target; if (!el || !el.dataset) return;
+  if (el.dataset.slot){ S['slot.' + el.dataset.slot] = el.value; changed(); return; }
+  var k = el.dataset.k; if (!k) return;
+  if (el.type === 'checkbox') S[k] = el.checked;
+  else if (el.type === 'radio'){ if (el.checked) S[k] = el.value; }
+  else S[k] = el.value;
+  changed();
+}
+document.addEventListener('input', onField);
+document.addEventListener('change', onField);
+document.addEventListener('focusout', function(e){ if (e.target && e.target.dataset && e.target.dataset.slot) updatePrompts(); });
+
+/* ---------- 복사 ---------- */
+var toastEl = $('#toast'), toastT = null;
+function toast(msg){ toastEl.textContent = msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 2200); }
+function fallbackCopy(t){
+  var ta = document.createElement('textarea'); ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.top = '0'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch(e){} ta.remove(); return ok;
+}
+function flash(btn, cls){ if (!btn) return; btn.classList.add(cls || 'done'); var old = btn.classList.contains('copy') || btn.classList.contains('btn') ? btn.textContent : null; if (old !== null) btn.textContent = '복사됨 ✓'; setTimeout(function(){ btn.classList.remove(cls || 'done'); if (old !== null) btn.textContent = old; }, 1500); }
+function copyText(text, btn, okMsg){
+  if (!text){ toast('아직 복사할 내용이 없어요'); return; }
+  var done = function(ok){ if (ok){ flash(btn); toast(okMsg || '복사했어요 · 입력창에 붙여넣기 (Ctrl + V)'); } else toast('복사가 안 돼요 · 글자를 드래그해서 Ctrl + C'); };
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ done(true); }, function(){ done(fallbackCopy(text)); }); }
+    else done(fallbackCopy(text));
+  } catch(e){ done(fallbackCopy(text)); }
+}
+document.addEventListener('click', function(e){
+  var b = e.target.closest('button, a'); if (!b) return;
+  if (b.dataset.copyP){ var c = compose(PROMPTS[b.dataset.copyP].tpl); copyText(c.text, b, c.missing ? '복사했어요 · 가사는 아직 없어요, 이어서 붙여넣어요' : null); return; }
+  if (b.dataset.copy != null && b.dataset.copy !== ''){ copyText(b.dataset.copy, b); return; }
+  if (b.dataset.copyShow){ var f = D[b.dataset.copyShow]; copyText(f ? f() : '', b); return; }
+  if (b.dataset.fill){ var k = b.dataset.fill; S[k] = b.dataset.text; var inp = $('[data-k="' + k + '"]'); if (inp) inp.value = S[k]; b.classList.add('done'); setTimeout(function(){ b.classList.remove('done'); }, 1200); changed(); return; }
+  if (b.dataset.fillSlot){ S['slot.' + b.dataset.fillSlot] = b.dataset.text; b.classList.add('done'); setTimeout(function(){ b.classList.remove('done'); }, 1200); changed(); return; }
+  if (b.dataset.try){ var t = b.closest('[data-tries]'), key = t.dataset.tries, max = +t.dataset.max; S[key] = Math.max(0, Math.min(max, (+S[key] || 0) + (+b.dataset.try))); changed(); return; }
+  if (b.dataset.tab){ showTab(b.dataset.tab, true); return; }
+  if (b.dataset.goto){ goTo(b.dataset.goto); return; }
+  if (b.classList.contains('tool') && b.classList.contains('off')){ e.preventDefault(); toast(b.dataset.link === 'sample' ? '선생님이 샘플 음악 주소를 아직 안 넣었어요 · 손 들기' : '선생님이 공유 폴더 주소를 아직 안 넣었어요 · 손 들기'); return; }
+  if (b.tagName === 'A' && b.classList.contains('off')){ e.preventDefault(); toast('선생님이 주소를 아직 안 넣었어요 · 손 들기'); }
+});
+
+/* ---------- 탭 ---------- */
+function showTab(id, scroll, quiet){
+  if (!$('#' + id)) id = 'p1';
+  $$('.tab').forEach(function(t){ var on = t.dataset.tab === id; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; });
+  $$('.panel').forEach(function(p){ p.hidden = p.id !== id; });
+  S._tab = id;
+  if (!quiet){ clearTimeout(saveTimer); saveTimer = setTimeout(function(){ lsSet(KEY, JSON.stringify(S)); }, 350); }
+  if (scroll){ var tabs = $('.tabs'); var y = tabs.getBoundingClientRect().top + window.pageYOffset - (window.innerWidth > 640 ? 80 : 8); if (window.pageYOffset > y) window.scrollTo(0, y); }
+}
+function goTo(id){
+  var el = document.getElementById(id); if (!el) return;
+  var panel = el.closest('.panel'); if (panel) showTab(panel.id, false);
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  var f = el.querySelector('input, textarea'); if (f) setTimeout(function(){ try { f.focus({ preventScroll: true }); } catch(e){ f.focus(); } }, 400);
+}
+$('.tabs').addEventListener('keydown', function(e){
+  if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+  var tabs = $$('.tab'), i = tabs.indexOf(document.activeElement); if (i < 0) return;
+  var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); showTab(n.dataset.tab, false);
+});
+
+/* ---------- 링크 ---------- */
+function setLinks(){
+  var L = { gemini: CONFIG.links.gemini, suno: CONFIG.links.suno, canva: CONFIG.links.canva, cutter: CONFIG.links.cutter, folder: C.folder, sample: C.sample };
+  $$('a[data-link]').forEach(function(a){
+    var u = L[a.dataset.link];
+    if (u){ a.href = u; a.classList.remove('off'); a.removeAttribute('aria-disabled'); a.removeAttribute('title'); }
+    else { a.removeAttribute('href'); a.classList.add('off'); a.setAttribute('aria-disabled', 'true'); a.setAttribute('role', 'link'); a.tabIndex = 0; a.title = '선생님이 주소를 넣으면 열려요'; }
+  });
+}
+
+/* ---------- 기법 지도 ---------- */
+function renderTechs(){
+  $$('[data-techs]').forEach(function(ul){
+    var p = +ul.dataset.techs;
+    ul.innerHTML = TECH.map(function(n, i){ var cls = TECH_P[i] < p ? 'got' : (TECH_P[i] === p ? 'now' : ''); return '<li class="tech ' + cls + '"><i>' + (TECH_P[i] < p ? '✓' : (i + 1)) + '</i>' + n + '</li>'; }).join('');
+  });
+  $$('[data-techpick]').forEach(function(box){
+    var pre = box.dataset.techpick;
+    box.innerHTML = TECH.slice(0, 8).map(function(n, i){ return '<label class="ck"><input type="checkbox" data-k="' + pre + (i + 1) + '">' + (i + 1) + ' ' + n + '</label>'; }).join('');
+  });
+}
+
+/* ---------- 파일로 받기 · 전체 복사 ---------- */
+function line(label, v){ return v ? '  ' + label + ': ' + v + '\n' : ''; }
+function checkedList(map){ return Object.keys(map).filter(function(k){ return S[k]; }).map(function(k){ return map[k]; }).join(', '); }
+function exportText(){
+  var t = '꿈채움 AI 캠프 · 생성형 AI 활용 숏폼 제작 활동지\n' + D.whoLine() + '\n' + (S._savedAt ? '저장: ' + fmtDate(S._savedAt) + '\n' : '') + '\n';
+  t += '[1교시] 프롬프트 공식과 콘텐츠 기획\n';
+  t += ' 1번 칸 · 프롬프트 일지\n' + line('처음 프롬프트', val('p1.first')) + line('고친 칸', checkedList({'p1.fx.what':'무엇을','p1.fx.feel':'어떤 느낌으로','p1.fx.cond':'조건'})) + line('고친 프롬프트', val('p1.fixed')) + line('결과', checkedList({'p1.rs.story':'내 이야기가 됐다','p1.rs.mood':'분위기가 생겼다','p1.rs.len':'길이가 맞았다'}));
+  t += ' 2번 칸 · 나의 아티스트\n' + line('테마', themeName()) + line('아티스트 이름', val('p1.artist')) + line('곡 주제', val('p1.topic')) + '\n';
+  t += '[2교시] AI로 가사 · 음악 · 이미지 만들기\n';
+  t += line('내가 쓴 가사 프롬프트', val('p2.myLyricPrompt'));
+  t += ' 1번 칸 · 고친 가사\n' + line('AI가 쓴 줄', val('p2.before')) + line('내가 고친 줄', val('p2.after'));
+  if (val('p2.lyrics')) t += '  완성 가사:\n' + val('p2.lyrics').split(/\r?\n/).map(function(l){ return '    ' + l; }).join('\n') + '\n';
+  t += ' 2번 칸 · 후렴 시간\n' + line('후렴', D.chorusTime());
+  var sc = [1,2,3,4].map(function(i){ return val('p2.sc' + i) ? '    ' + i + '. ' + val('p2.sc' + i) : ''; }).filter(Boolean);
+  if (sc.length) t += '  장면:\n' + sc.join('\n') + '\n';
+  t += line('그림체', slotVal('artstyle')) + line('주인공', slotVal('hero')) + '\n';
+  t += '[3교시] 이미지 완성과 숏폼 편집\n';
+  t += ' 1번 칸 · 장면 ' + (S['p3.which'] === '4' ? '④' : '③') + ' 내 프롬프트\n' + line('프롬프트', val('p3.myPrompt'));
+  t += line('들어간 기법', TECH.slice(0, 8).filter(function(_, i){ return S['p3.t' + (i + 1)]; }).join(', '));
+  t += line('Flow는 왜 만 18세 이상일까', val('p3.flow')) + '\n';
+  t += '[4교시] 숏폼 상영과 AI 윤리\n';
+  t += line('숏폼 제목', val('p4.title')) + line('한 줄 소개', val('p4.intro'));
+  t += ' 1번 칸 · 프롬프트 여정\n' + line('발표 문장', D.journey());
+  t += ' 2번 칸 · 나의 AI 활용 헌장\n' + line('만들 때 나는', val('p4.c1')) + line('올릴 때 나는', val('p4.c2')) + line('다른 사람의 것은', val('p4.c3'));
+  t += line('나의 질문 선언', val('p4.declare') ? '나는 AI에게 ' + val('p4.declare') + '하게 묻는 사람이다.' : '');
+  t += line('마무리 체크', checkedList({'p4.f1':'노래는 후렴만','p4.f2':'그림 4장이 가사에 맞춰 바뀜','p4.f3':'움직임 확인','p4.f4':'자막 4줄','p4.f5':'30초 미만 · MP4 · 공유 폴더'}));
+  return t;
+}
+function fileName(){ var b = val('id.ban') || '_', n = val('id.no') || '_', nm = val('id.name') || '이름'; return '3학년' + b + '반_' + n + '번_' + nm + '_AI캠프활동지.txt'; }
+var framed = false; try { framed = window.self !== window.top; } catch(e){ framed = true; }
+if (framed) $('#dlNote').textContent = '이 화면에서 파일 받기가 막혀 있으면 \'전체 내용 복사\'를 눌러 메모장이나 문서에 붙여넣어요. 받은 파일(.txt)은 공유 폴더 내 이름 폴더에 올려 두면 선생님도 볼 수 있어요.';
+$('#dlBtn').addEventListener('click', function(){
+  save();
+  try {
+    var blob = new Blob(['﻿' + exportText()], { type: 'text/plain;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fileName();
+    document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+    toast('파일을 받았어요 · 다운로드 폴더 → 공유 폴더에 올려요');
+  } catch(e){ toast('파일 받기가 안 돼요 · 전체 내용 복사를 써요'); }
+});
+$('#copyAllBtn').addEventListener('click', function(e){ copyText(exportText(), e.currentTarget, '활동지 전체를 복사했어요'); });
+
+/* 4교시 여정 문장 틀: 1교시 1번 칸(처음 · 고친 프롬프트 · 고친 칸 · 결과)에서 빈칸만 채우기 */
+$('#pullJourney').addEventListener('click', function(){
+  if (!val('p1.first') && !val('p1.fixed')){ toast('1교시 1번 칸이 비어 있어요 · 2교시나 3교시 것에서 골라 써요'); return; }
+  var fx = S['p1.fx.what'] ? '누구 이야기인지 모르는 것' : S['p1.fx.feel'] ? '분위기' : S['p1.fx.cond'] ? '길이' : '';
+  var rs = S['p1.rs.story'] ? '내 이야기' : S['p1.rs.mood'] ? '분위기' : S['p1.rs.len'] ? '길이' : '';
+  var map = { 'p4.j1': val('p1.first'), 'p4.j2': fx, 'p4.j3': val('p1.fixed'), 'p4.j4': rs }, n = 0;
+  Object.keys(map).forEach(function(k){ if (map[k] && !val(k)){ S[k] = map[k]; n++; } });
+  bindAll(); changed();
+  toast(n ? '빈칸 ' + n + '개를 1교시 1번 칸에서 채웠어요 · 내 말로 다듬어요' : '이미 채워져 있어요');
+});
+
+/* ---------- 같은 크롬북을 여러 학생이 쓸 때 ---------- */
+function armTwoStep(btn, label, action){
+  var armed = false, timer = null, orig = btn.textContent;
+  btn.addEventListener('click', function(){
+    if (!armed){ armed = true; btn.textContent = label; btn.classList.add('warnb'); timer = setTimeout(function(){ armed = false; btn.textContent = orig; btn.classList.remove('warnb'); }, 4000); return; }
+    clearTimeout(timer); armed = false; btn.textContent = orig; btn.classList.remove('warnb'); action();
+  });
+}
+function wipe(){
+  lsSet(PKEY, JSON.stringify(S));
+  var keep = { _tab: 'p1' }; if (C.ban) keep['id.ban'] = String(C.ban);
+  S = keep; save(); bindAll(); refresh(); showTab('p1', true); $('#restore').hidden = true;
+  toast('새 활동지로 시작해요');
+}
+armTwoStep($('#newBtn'), '정말 지울까요? 한 번 더 누르기', wipe);
+armTwoStep($('#wipeBtn'), '정말 지울까요? 한 번 더 누르기', wipe);
+$('#keepBtn').addEventListener('click', function(){ $('#restore').hidden = true; });
+
+/* ---------- 선생님용 ---------- */
+$('#t-ban').value = C.ban || ''; $('#t-song').value = C.song; $('#t-edit').value = C.edit; $('#t-folder').value = C.folder || ''; $('#t-sample').value = C.sample || '';
+function teacherVals(){ return { ban: $('#t-ban').value.trim(), song: $('#t-song').value, edit: $('#t-edit').value, folder: $('#t-folder').value.trim(), sample: $('#t-sample').value.trim() }; }
+$('#tApply').addEventListener('click', function(){
+  T = teacherVals(); lsSet(TKEY, JSON.stringify(T));
+  C.song = T.song; C.edit = T.edit; C.folder = T.folder || CONFIG.links.folder; C.sample = T.sample || CONFIG.links.sample; C.ban = T.ban || CONFIG.ban;
+  if (C.ban && !val('id.ban')){ S['id.ban'] = C.ban; bindAll(); }
+  setLinks(); changed(); toast('이 기기에 적용했어요');
+});
+$('#tLink').addEventListener('click', function(e){
+  var v = teacherVals(), p = [];
+  if (v.ban) p.push('ban=' + encodeURIComponent(v.ban));
+  if (v.song !== 'choose') p.push('song=' + v.song);
+  if (v.edit !== 'choose') p.push('edit=' + v.edit);
+  if (v.folder) p.push('folder=' + encodeURIComponent(v.folder));
+  if (v.sample) p.push('sample=' + encodeURIComponent(v.sample));
+  var base = location.href.split('#')[0].split('?')[0];
+  var url = base + (p.length ? '?' + p.join('&') : '');
+  $('#tOutWrap').hidden = false; $('#tOut').value = url; copyText(url, e.currentTarget, '반별 링크를 복사했어요');
+});
+$('#tRestore').addEventListener('click', function(){
+  var prev = lsGet(PKEY); if (!prev){ toast('되살릴 활동지가 없어요'); return; }
+  lsSet(PKEY, JSON.stringify(S)); S = parse(prev); save(); bindAll(); refresh(); toast('지우기 전 활동지를 되살렸어요');
+});
+
+/* ---------- 시작 ---------- */
+buildPrompts(); renderTechs(); setLinks(); bindAll();
+var hadData = Object.keys(S).some(function(k){ return k.charAt(0) !== '_' && k !== 'id.ban' && filled(k); });
+if (hadData && S._savedAt){
+  $('#restoreWho').textContent = D.whoLine() + ' · 마지막 저장 ' + fmtDate(S._savedAt) + ' · 다른 사람 것이면 새로 시작해요.';
+  $('#restore').hidden = false;
+}
+var startTab = 'p1', qt = Q.get('t');
+if (qt && /^[1-4]$/.test(qt)) startTab = 'p' + qt;
+else { var ht = H.filter(function(x){ return /^p[1-4]$/.test(x); })[0]; startTab = ht || (S._tab && /^p[1-4]$/.test(S._tab) ? S._tab : 'p1'); }
+showTab(startTab, false, true);
+refresh();
+savedEl.textContent = S._savedAt ? '자동 저장됨 · ' + fmtTime(S._savedAt) : '쓰면 자동 저장돼요';
+})();
+</script>
+
+</body></html>
