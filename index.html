@@ -1091,7 +1091,14 @@ function deckFilename(){
 // 반 설정 (?song=suno&edit=cutter)
 const q = new URLSearchParams(location.search);
 // 고른 도구는 이 창에서만 기억 (창을 새로 열면 기본 제미나이 · Canva) → 앞 반 · 예전 활동지 설정이 남지 않음
-const T = { get(k){ try { return sessionStorage.getItem('tool:'+k); } catch(e){ return null; } }, set(k,v){ try { sessionStorage.setItem('tool:'+k, v); } catch(e){} } };
+// 세션 저장소가 차단된 크롬북/로컬 HTML에서도 선택한 도구가 현재 탭에서 유지되도록 메모리 대체 저장
+const toolMemory = {};
+const T = {
+  get(k){ if(Object.prototype.hasOwnProperty.call(toolMemory,k)) return toolMemory[k];
+    try { return sessionStorage.getItem('tool:'+k); } catch(e){ return null; } },
+  set(k,v){ toolMemory[k]=String(v);
+    try { sessionStorage.setItem('tool:'+k, v); } catch(e){} }
+};
 ['song','edit'].forEach(k => { if (q.get(k)) T.set(k, q.get(k)); });
 function setMode(){  // 고른 도구(S.song · S.edit)에 맞는 카드만 보이기
   const b = document.body.classList;
@@ -2340,6 +2347,8 @@ if(d&&v){var t=d.getAttribute('data-type')||'video/mp4',u='data:'+t+';base64,'+d
   btn.disabled=false;
 }
 document.querySelectorAll('[data-export]').forEach(b=>b.onclick=()=>exportDeck(b));
+// 저장된 3~6장 장면 수를 새로 열 때 복원하고 입력 영역·선택 버튼을 일치시킵니다.
+applySceneCount(sceneCount());
 busy(true); Promise.all([...document.querySelectorAll('.media-field')].map(el=>{setup(el);return paint(el);})).finally(()=>busy(false));
 refreshDeck();
 })();
