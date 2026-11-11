@@ -1046,14 +1046,12 @@ header#bar #who{color:#CDE8D8}
 <div class="card box" data-need="">
 <h3><span class="badge badge-practice">연습</span>상영회 · 발표</h3>
 <h4>발표 문장 채우기</h4>
-<p class="tip">3교시에 기록한 <b>장면 1 이미지 생성 프롬프트</b>를 자동으로 불러옵니다. 실제로 고친 내용과 달라진 결과를 직접 작성해 발표하세요.</p>
 <div class="speech-fields">
-<label for="p4-j1">처음 사용한 프롬프트</label><textarea id="p4-j1" data-k="p4_j1" aria-label="처음 프롬프트" placeholder="3교시 장면 1 프롬프트가 자동으로 들어갑니다"></textarea>
-<label for="p4-j2">아쉬웠던 점 · 왜 고치려고 했나요?</label><input id="p4-j2" aria-label="아쉬웠던 점" data-k="p4_j2" type="text" placeholder="예) 인물 얼굴이 달랐어요"/>
-<label for="p4-j3">다시 요청한 프롬프트</label><textarea id="p4-j3" data-k="p4_j3" aria-label="바꾼 프롬프트" placeholder="처음 프롬프트를 수정해 보세요"></textarea>
-<label for="p4-j4">결과가 어떻게 달라졌나요?</label><input id="p4-j4" aria-label="달라진 결과" data-k="p4_j4" type="text" placeholder="예) 앞 장면과 같은 인물로 바뀌었어요"/>
-</div>
-<p class="tip">말하기 예시: “처음에는 이런 프롬프트를 사용했어요. 결과에서 아쉬운 점이 있어 수정해 다시 요청했고, 이런 점이 달라졌어요.”</p></div>
+<label for="p4-j1">1. 어떤 이야기를 숏폼으로 만들고 싶었나요?</label><textarea id="p4-j1" data-k="p4_j1" aria-label="어떤 이야기를 숏폼으로 만들고 싶었나요?" placeholder="만들고 싶었던 이야기와 주제를 적어 보세요."></textarea>
+<label for="p4-j2">2. 생성형 AI는 어떤 장점이 있나요?</label><textarea id="p4-j2" data-k="p4_j2" aria-label="생성형 AI는 어떤 장점이 있나요?" placeholder="작품을 만들면서 느낀 장점을 적어 보세요."></textarea>
+<label for="p4-j3">3. AI를 사용해보니 어떤 점이 어려웠나요?</label><textarea id="p4-j3" data-k="p4_j3" aria-label="AI를 사용해보니 어떤 점이 어려웠나요?" placeholder="사용하면서 어려웠던 점을 적어 보세요."></textarea>
+<label for="p4-j4">4. 숏폼 외에도 AI로 어떤 작품을 만들 수 있을까요?</label><textarea id="p4-j4" data-k="p4_j4" aria-label="숏폼 외에도 AI로 어떤 작품을 만들 수 있을까요?" placeholder="새롭게 만들고 싶은 작품을 적어 보세요."></textarea>
+</div></div>
 <div class="card box" data-need="">
 <h3><span class="badge badge-practice">연습</span>나의 AI 약속</h3>
 <label for="p4-c1">만들 때 나는</label>
@@ -1179,7 +1177,7 @@ function fallback(t, done){
 document.querySelectorAll('[data-k]').forEach(el => {
   const v = S.get(el.dataset.k);
   if (el.type === 'checkbox') el.checked = v === '1'; else if (v !== null) el.value = v;
-  el.addEventListener('input', () => { if(['ban','no'].includes(el.dataset.k)) S.set('confirmedFolder',''); S.set(el.dataset.k, el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value); refresh(); });
+  el.addEventListener('input', () => { if(['ban','no','name'].includes(el.dataset.k)) S.set('confirmedFolder',''); S.set(el.dataset.k, el.type === 'checkbox' ? (el.checked ? '1' : '') : el.value); refresh(); });
 });
 
 function selectedFolderKey(){
@@ -1210,7 +1208,7 @@ function updateWorkButtons(confirmed){
 function refreshFolder(){
  const key=selectedFolderKey();
  const valid=Object.prototype.hasOwnProperty.call(STUDENT_FOLDERS,key);
- const confirmed=valid && S.get('confirmedFolder')===key;
+ const confirmed=valid && !!String(S.get('name')||'').trim() && S.get('confirmedFolder')===key && S.get('savedName')===S.get('name');
  updateWorkButtons(confirmed);
  const button=document.getElementById('confirm-folder');
  const status=document.getElementById('folder-status');
@@ -1222,13 +1220,13 @@ function refreshFolder(){
  }else{
   status.textContent=valid?`3학년 ${S.get('ban')}반 ${S.get('no')}번이 맞는지 확인하고 저장 버튼을 눌러요.`:'반과 번호를 선택한 뒤 저장 버튼을 눌러요.';
  }
- button.disabled=!valid||(confirmed && S.get('savedName')===(S.get('name')||''));
+ button.disabled=!valid||!String(S.get('name')||'').trim()||confirmed;
  button.textContent='저장';
  if(confirmed && !button.disabled)status.textContent+='\n이름을 바꿨어요. 저장을 다시 눌러 주세요.';
 }
 document.getElementById('confirm-folder').addEventListener('click',()=>{
  const key=selectedFolderKey();
- if(Object.prototype.hasOwnProperty.call(STUDENT_FOLDERS,key)){
+ if(Object.prototype.hasOwnProperty.call(STUDENT_FOLDERS,key) && String(S.get('name')||'').trim()){
   S.set('confirmedFolder',key);S.set('savedName',S.get('name')||'');refresh();
   document.body.classList.add('folder-new');setTimeout(()=>document.body.classList.remove('folder-new'),3600);
  }
@@ -1314,6 +1312,18 @@ function updateSteps(){
     // 명시적인 수행 완료 체크가 있는 단계는 체크 상태를 우선 반영합니다.
     const taskChecks = f.filter(el => el.type === 'checkbox' && el.closest('.task-complete'));
     const completionFields = taskChecks.length ? taskChecks : f;
+    // 1교시 준비하기는 세 항목을 채우는 것만으로 완료되지 않습니다.
+    // 저장 버튼으로 현재 반·번호·이름을 확정한 상태에서만 완료 표시합니다.
+    if (a.card.querySelector('#confirm-folder')) {
+      const key = selectedFolderKey();
+      const name = S.get('name') || '';
+      const saved = Object.prototype.hasOwnProperty.call(STUDENT_FOLDERS,key)
+        && !!String(name).trim()
+        && S.get('confirmedFolder') === key
+        && S.get('savedName') === name;
+      a.classList.toggle('done', saved);
+      return;
+    }
     a.classList.toggle("done", completionFields.length > 0 && completionFields.every(isStudentEntered));
   });
 }
@@ -1368,7 +1378,7 @@ function copyText(text, button){
 }
 function fieldLabel(el){
   if(el.dataset.printLabel)return el.dataset.printLabel;
-  const labels={p2_s_m:'후렴 시작 · 분',p2_s_s:'후렴 시작 · 초',p2_e_m:'후렴 끝 · 분',p2_e_s:'후렴 끝 · 초',p4_j1:'처음 프롬프트',p4_j2:'아쉬웠던 점',p4_j3:'바꾼 프롬프트',p4_j4:'달라진 결과'};
+  const labels={p2_s_m:'후렴 시작 · 분',p2_s_s:'후렴 시작 · 초',p2_e_m:'후렴 끝 · 분',p2_e_s:'후렴 끝 · 초',p4_j1:'만들고 싶었던 이야기',p4_j2:'생성형 AI의 장점',p4_j3:'AI 사용의 어려움',p4_j4:'AI로 만들 수 있는 다른 작품'};
   if(labels[el.dataset.k])return labels[el.dataset.k];
   if(el.getAttribute('aria-label')) return el.getAttribute('aria-label');
   let prev=el.previousElementSibling;
@@ -1411,28 +1421,7 @@ document.querySelectorAll('input[type="text"][data-k],input[type="number"][data-
  source.addEventListener('input',sync);
  sync();
 })();
-// 4교시 발표용 문장은 3교시 장면 1 실제 프롬프트를 편집할 수 있게 불러옵니다.
-(function(){
- const source=document.querySelector('[data-k="img1_prompt"]');if(!source)return;
- const keys=['p4_j1','p4_j3'];
- const auto={};
- keys.forEach(key=>{
-  const el=document.querySelector('[data-k="'+key+'"]');
-  auto[key]=!!el && S.get(key+'_autofill')!=='0' && (!S.get(key)||S.get(key+'_autofill')==='1');
-  if(el)el.addEventListener('input',()=>{auto[key]=false;S.set(key+'_autofill','0');});
- });
- function sync(){
-  const value=source.value.trim();if(!value)return;
-  keys.forEach(key=>{
-   if(!auto[key])return;
-   const el=document.querySelector('[data-k="'+key+'"]');if(!el)return;
-   el.value=value;S.set(key,value);S.set(key+'_autofill','1');
-  });
-  updateSteps();
- }
- source.addEventListener('input',sync);
- sync();
-})();
+
 
 // 프롬프트 만들기: 바꿀 부분 색 표시 (글자 투명 textarea 뒤에 색칠한 사본)
 (function(){
@@ -2263,47 +2252,48 @@ async function exportDeck(btn){
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;font-family:Pretendard,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;word-break:keep-all}
 body{color:var(--ink);background:#0D2015}
-.screen{display:grid;grid-template-columns:minmax(0,32%) minmax(0,1fr);gap:clamp(12px,1.2vw,22px);padding:clamp(12px,1.2vw,22px);height:100vh;height:100dvh}
+.screen{display:grid;grid-template-columns:minmax(280px,32%) minmax(0,1fr);gap:clamp(12px,1.2vw,22px);padding:clamp(12px,1.2vw,22px);height:100vh;height:100dvh}
+/* 왼쪽 영상은 한 번만 배치하고, 오른쪽 자료만 세로로 스크롤합니다. */
 .player{position:relative;min-width:0;min-height:0;border-radius:16px;background:#050C08;overflow:hidden;display:grid;place-items:center}
 .player video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
 .no-video{color:#D4E4DA;font-size:clamp(16px,1.6vw,22px)}
-.content{min-height:0;min-width:0;overflow:hidden;display:grid;grid-template-rows:auto minmax(0,1fr);gap:clamp(12px,1.25vw,22px);padding:clamp(16px,1.7vw,30px);border-radius:16px;background:var(--soft)}
-.head{min-width:0;border-bottom:1px solid var(--line);padding-bottom:clamp(8px,.8vw,16px)}
+.content{min-height:0;min-width:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;display:block;padding:clamp(16px,1.7vw,30px);border-radius:16px;background:var(--soft)}
+.head{min-width:0;border-bottom:1px solid var(--line);padding-bottom:clamp(8px,.8vw,16px);margin-bottom:clamp(12px,1.25vw,22px)}
 .head-label{display:block;margin:0 0 4px;color:var(--g);font-size:clamp(13px,1.02vw,17px);font-weight:800}
 .metadata-label{display:inline-block;margin-right:9px;color:var(--muted);font-size:.82em;font-weight:700}
 h1{margin:0;font-size:clamp(29px,3vw,53px);font-weight:800;letter-spacing:-.035em;line-height:1.18;overflow-wrap:anywhere}
 .artist{margin:6px 0 0;color:var(--g);font-size:clamp(16px,1.4vw,23px);font-weight:700}
 .intro{margin:4px 0 0;color:var(--muted);font-size:clamp(14px,1.12vw,19px)}
-.body-grid{min-height:0;min-width:0;display:grid;grid-template-columns:minmax(0,.68fr) minmax(0,1.55fr);gap:clamp(12px,1.1vw,20px)}
-.lyric-pane,.scene-pane{min-height:0;min-width:0;overflow:auto;scrollbar-width:thin}
-.lyric-pane{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:clamp(10px,1vw,16px);overflow:hidden}
-.lyric-block{display:flex;flex-direction:column;min-height:0;min-width:0}
-.lyric-block .lyrics{flex:1;min-height:0;overflow:auto;scrollbar-width:thin}
+/* 1행: 최초/최종 가사, 2행부터: 장면 1/2, 3/4, 5/6... */
+.body-grid{min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,1.1vw,20px);align-items:start}
+.lyric-pane,.scene-pane,.scene-grid{display:contents}
+.lyric-block{display:flex;flex-direction:column;min-width:0;min-height:0;height:clamp(270px,45vh,480px)}
+.lyric-block .lyrics{flex:1;min-height:0;overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain}
 h2{margin:0 0 10px;font-size:clamp(18px,1.42vw,25px);font-weight:800;line-height:1.25;color:var(--g)}
-.lyrics{margin:0;padding:clamp(12px,1.2vw,20px);border:1px solid var(--line);border-radius:12px;background:#fff;font-size:clamp(15px,1.25vw,21px);line-height:1.63;overflow-wrap:anywhere}
+.scene-pane>h2{grid-column:1/-1;margin:2px 0 -4px}
+.lyrics{margin:0;padding:clamp(12px,1.2vw,20px);border:1px solid var(--line);border-radius:12px;background:#fff;font-size:clamp(15px,1.12vw,19px);line-height:1.6;overflow-wrap:anywhere}
 .lyrics p{margin:0 0 .12em}.lyrics .tag{font-size:.8em;color:var(--g);font-weight:800;margin-top:.7em}.lyrics .gap{height:.6em}
 mark{background:#FFDEC8;border-radius:3px;padding:0 2px;color:inherit}
 .lyrics .lyric-change{background:#FFA65C;color:#49260C;padding:1px 3px;border-radius:4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.scene-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(8px,.9vw,14px);align-content:start}
-.scene-card{min-width:0;min-height:0;margin:0;display:flex;align-items:flex-start;gap:clamp(8px,.7vw,12px);padding:clamp(9px,.85vw,14px);border-radius:12px;border:1px solid var(--line);background:#fff;cursor:zoom-in}
+.scene-card{min-width:0;min-height:205px;margin:0;display:flex;align-items:flex-start;gap:clamp(8px,.7vw,12px);padding:clamp(10px,.85vw,14px);border-radius:12px;border:1px solid var(--line);background:#fff;cursor:zoom-in}
 .scene-visual{flex:0 0 auto;min-width:0;display:flex;flex-direction:column;gap:5px}
 .field-label{display:block;color:var(--muted);font-size:clamp(11px,.83vw,14px);font-weight:700;line-height:1.25}
 .scene-card figcaption .field-label{margin:5px 0 3px}
-.scene-card img,.placeholder{display:block;flex:0 0 auto;width:clamp(58px,5vw,95px);height:clamp(118px,15vh,195px);object-fit:contain;background:#E9EFEC;border-radius:7px}
+.scene-card img,.placeholder{display:block;flex:0 0 auto;width:clamp(58px,6vw,100px);height:clamp(118px,18vh,195px);object-fit:contain;background:#E9EFEC;border-radius:7px}
 .placeholder{display:grid;place-items:center;text-align:center;font-size:13px;color:var(--muted)}
 .scene-card figcaption{min-width:0;flex:1}
 .scene-card figcaption b{display:block;margin:0 0 5px;color:var(--g);font-size:clamp(15px,1.12vw,19px)}
-.prompt{margin:0;font-size:clamp(13px,.98vw,17px);line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;max-height:clamp(120px,19vh,245px);overflow:auto}
+.prompt{margin:0;font-size:clamp(13px,.95vw,17px);line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;max-height:clamp(130px,20vh,230px);overflow:auto;scrollbar-width:thin}
 .empty{color:var(--muted)}
 #zoom{display:none;position:fixed;inset:0;z-index:99;background:#07130DEB;align-items:center;justify-content:center;gap:3vw;padding:4vw;cursor:zoom-out}
 #zoom.on{display:flex}
 #zoom img{max-height:88vh;max-width:44vw;object-fit:contain;border-radius:12px}
 #zoom div{max-width:42vw;color:#fff;font-size:clamp(17px,2vw,28px);line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
 #zoom div b{display:block;color:#A9E8BF;margin-bottom:.5em}
-@media(max-width:1200px){.screen{grid-template-columns:minmax(0,29%) minmax(0,1fr)}.body-grid{grid-template-columns:minmax(0,.76fr) minmax(0,1.3fr)}.scene-card img,.placeholder{width:clamp(52px,5.3vw,85px)}}
-@media(max-width:900px),(orientation:portrait){.screen{height:auto;min-height:100vh;grid-template-columns:1fr}.player{width:min(100%,410px);height:min(72vh,690px);margin:auto}.content{overflow:visible}.body-grid{grid-template-columns:1fr}.lyric-pane,.scene-pane{overflow:visible}.lyric-pane{grid-template-rows:auto}.lyric-block .lyrics{overflow:visible}.scene-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.scene-card img,.placeholder{width:clamp(64px,12vw,100px)}}
-@media(max-width:540px){.scene-grid{grid-template-columns:1fr}.content{padding:16px}.player{height:60vh}.scene-card img,.placeholder{width:90px;height:150px}#zoom{flex-direction:column}#zoom img{max-height:55vh;max-width:90vw}#zoom div{max-width:90vw}}
-@media print{body{background:#fff}.screen{display:block;height:auto}.player{display:none}.content{overflow:visible}.body-grid{display:block}.lyric-pane,.scene-pane{overflow:visible}.lyric-pane{grid-template-rows:auto}.lyric-block .lyrics{overflow:visible}.scene-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1050px){.screen{grid-template-columns:minmax(240px,30%) minmax(0,1fr)}.scene-card img,.placeholder{width:clamp(50px,5.2vw,85px)}}
+@media(max-width:760px),(orientation:portrait){.screen{height:auto;min-height:100vh;grid-template-columns:1fr}.player{width:min(100%,410px);height:min(70vh,690px);margin:auto}.content{overflow:visible}.lyric-block{height:clamp(270px,44vh,440px)}.scene-card img,.placeholder{width:clamp(64px,11vw,100px)}}
+@media(max-width:540px){.body-grid{grid-template-columns:1fr}.scene-pane>h2{grid-column:1}.content{padding:16px}.player{height:60vh}.scene-card img,.placeholder{width:90px;height:150px}#zoom{flex-direction:column}#zoom img{max-height:55vh;max-width:90vw}#zoom div{max-width:90vw}}
+@media print{body{background:#fff}.screen{display:block;height:auto}.player{display:none}.content{overflow:visible}.body-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lyric-block{height:auto;break-inside:avoid}.lyric-block .lyrics,.prompt{overflow:visible;max-height:none}.scene-card{break-inside:avoid}}
 
 /* 크게 보이는 영상 첫 프레임 표지 */
 .opening-cover{position:fixed;inset:0;z-index:101;isolation:isolate;overflow:hidden;background:#10261b;color:#fff;cursor:pointer}
