@@ -720,6 +720,7 @@ header#bar #who{color:#CDE8D8}
   <p>이 활동지에 저장된 반·번호, 답변, 진행 상태, 그림·영상 첨부를 삭제합니다. 다운로드 파일과 Google Drive 파일은 삭제하지 않습니다.</p>
 </div>
 <div class="help-teacher"><span>선생님용</span><button id="viewbtn" type="button"></button></div>
+<div class="help-teacher"><span>강사용 자료</span><button id="teacher-folder-link" type="button" style="min-height:40px;padding:0 12px;border:1px solid var(--g);border-radius:8px;background:#fff;color:var(--g-dark);font:inherit;font-weight:700;cursor:pointer">강사용 폴더 열기</button></div>
 </div>
 <main>
 <div id="intro"></div>
@@ -1081,7 +1082,7 @@ header#bar #who{color:#CDE8D8}
 <div aria-hidden="true" id="print-root"></div>
 <script>
 // 반별로 바꿀 주소. '#'이면 버튼이 회색으로 보임
-const WORK_FOLDERS = {"1": "1r-UzmeGb4okDa6PyGYc8ilq3ExEhL4My", "2": "1gw9iEztTcJCd_XDi3ngmvM2-bZxGbjwS", "3": "1IArkH8TzaZUANiDJow39_d15lY6UQrNi", "4": "1mzmhH3Hnn19I47a9ol3T2iXiN-hUl8kq", "5": "1w3oZsVyg1871cszFXYcwIRQJAr0eI9PU"};
+const WORK_FOLDERS = {"1": "1TL_Z9WDZqs3orYldQWUyOoOiJto03d6y", "2": "1b8Ol6oXVIdlkoEGBuaOeKpT9GOfNeFo_", "3": "1llt95OGFGtbPEPb-2r2PMYsrRbsKyrnv", "4": "1doA_FneeQBCyBBs4CuJnnT3IvCjqVlX6", "5": "1ezDp3WamehW336Y0L5m1Ui9eheHJODo_"};
 const STUDENT_FOLDERS = Object.fromEntries(Object.entries(WORK_FOLDERS).flatMap(([ban,id])=>Array.from({length:35},(_,i)=>[ban+"-"+(i+1),id])));
 const LINKS = {
   gemini: 'https://gemini.google.com',
@@ -2388,6 +2389,22 @@ refreshDeck();
       button.disabled=false;button.textContent='입력 데이터 초기화';
       alert('초기화에 실패했습니다. 브라우저의 이 사이트 저장소 권한을 확인해 주세요.');
     }
+  });
+})();
+</script>
+<script>
+// 강사용 폴더 UI 확인용 암호입니다. 실제 접근 통제는 Google Drive 공유 권한으로 관리하세요.
+(function(){
+  const button=document.getElementById('teacher-folder-link');
+  if(!button)return;
+  button.addEventListener('click',function(){
+    const entered=window.prompt('강사용 폴더 비밀번호를 입력하세요.');
+    if(entered===null)return;
+    if(entered!=='forest'){
+      window.alert('비밀번호가 올바르지 않습니다.');
+      return;
+    }
+    window.open('https://drive.google.com/drive/folders/1RnYhI-RwOlR8x1z_R2A-U1I7FKIwqcHM','_blank','noopener,noreferrer');
   });
 })();
 </script>
