@@ -616,6 +616,18 @@ header#bar #who{color:#CDE8D8}
 .pledge-direct{margin:6px 0 12px;padding:8px 12px;border:1px dashed var(--wr-line);border-radius:8px;background:var(--wr-soft)}
 .pledge-direct[hidden]{display:none!important}.pledge-direct label{margin:0 0 4px}
 
+
+/* 도움말: 샘플 음악 직접 다운로드 카드 */
+#help .sample-music-card{display:flex;gap:12px;align-items:center;justify-content:space-between;margin:10px 0 8px;padding:14px 12px;background:#fff;border:1.5px solid var(--line);border-radius:10px}
+#help .sample-music-info{display:flex;align-items:center;gap:10px;min-width:0}
+#help .sample-music-symbol{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:9px;background:var(--g-soft);color:var(--g-dark);font-size:25px}
+#help .sample-music-info strong,#help .sample-music-info small{display:block}
+#help .sample-music-info strong{font-size:15px;color:var(--g-dark)}
+#help .sample-music-info small{font-size:12px;color:var(--muted);line-height:1.4}
+#help .sample-music-download{flex:none;display:inline-flex;align-items:center;justify-content:center;padding:9px 12px;border-radius:8px;background:var(--g);color:#fff;font-size:13px;font-weight:700;text-decoration:none}
+#help .sample-music-download:hover{background:var(--g-dark)}
+#help .sample-music-download:focus-visible{outline:3px solid #F2A65A;outline-offset:2px}
+
 /* 샘플 이미지: 활동지 안에 원본 PNG 내장, 개별 다운로드 */
 #help .sample-video-link::after{content:"↗"}
 #help .sample-image-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:9px 0 4px}
@@ -680,7 +692,10 @@ header#bar #who{color:#CDE8D8}
 <p class="key">먼저 <b>손 들기</b> → 보조 선생님이 와요. 혼자 끙끙대지 않아요.</p>
 <h4>샘플 파일 받기</h4>
 <p class="tip">노래나 그림이 안 만들어졌을 때만 써요</p>
-<div class="help-links"><a data-link="sample" class="sample-video-link">샘플 음악 폴더 열기</a></div>
+<div class="sample-music-card" role="group" aria-label="샘플 음악 다운로드">
+  <div class="sample-music-info"><span class="sample-music-symbol" aria-hidden="true">♪</span><div><strong>샘플 음악</strong><small>노래 생성이 안 됐을 때 사용하는 MP3</small></div></div>
+  <a class="sample-music-download" href="./음악_샘플.mp3" download="음악_샘플.mp3" aria-label="샘플 음악 MP3 바로 다운로드">↓ 다운로드</a>
+</div>
 <p class="tip">그림은 필요한 장면을 눌러 한 장씩 다운로드해요.</p>
 <div class="sample-image-grid" role="group" aria-label="샘플 이미지 개별 다운로드">
 <button type="button" class="sample-image-download" data-download-name="장면1_샘플.png" aria-label="장면 1 샘플 이미지 다운로드">
