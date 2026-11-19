@@ -706,6 +706,10 @@ textarea.scene-box{min-height:calc(1.7em * 8 + 22px);field-sizing:content;max-he
 .survey-guide table{margin:0 0 10px}
 .survey-guide td:first-child{width:7em;font-weight:700;color:var(--g-dark)}
 .survey-guide img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:10px}
+#more-link{display:inline-flex;align-items:center;gap:4px;min-height:40px;padding:0 12px;border:1px solid var(--g);border-radius:8px;background:#fff;color:var(--g-dark);font-size:14px;font-weight:700;text-decoration:none;cursor:pointer}
+#more-link[href]::after{content:"↗";font-size:13px}
+#more-link:hover{background:var(--g-soft)}
+#more-link.off{border-style:dashed;color:var(--muted)}
 </style></head>
 <body class="song-gemini edit-canva">
 <header id="bar">
@@ -759,7 +763,7 @@ textarea.scene-box{min-height:calc(1.7em * 8 + 22px);field-sizing:content;max-he
   <p>이 활동지에 저장된 반·번호, 답변, 진행 상태, 그림·영상 첨부를 삭제합니다. 다운로드 파일과 Google Drive 파일은 삭제하지 않습니다.</p>
 </div>
 <div class="help-teacher"><span>선생님용</span><button id="viewbtn" type="button"></button></div>
-<div class="help-teacher"><span>강사용 자료</span><button id="teacher-folder-link" type="button" style="min-height:40px;padding:0 12px;border:1px solid var(--g);border-radius:8px;background:#fff;color:var(--g-dark);font:inherit;font-weight:700;cursor:pointer">강사용 폴더 열기</button></div>
+<div class="help-teacher"><span>강사용 자료</span><div class="help-teacher-actions"><a data-link="more" id="more-link">추가 자료</a><button id="teacher-folder-link" type="button" style="min-height:40px;padding:0 12px;border:1px solid var(--g);border-radius:8px;background:#fff;color:var(--g-dark);font:inherit;font-weight:700;cursor:pointer">강사용 폴더 열기</button></div></div>
 </div>
 <main>
 <div id="intro"></div>
@@ -1177,7 +1181,8 @@ const LINKS = {
   canva:  'https://www.canva.com',
   cutter: 'https://online-video-cutter.com/ko/video-editor',
   sample: 'https://drive.google.com/drive/folders/171fZkdwe7_RxRA7nojFFjPhcFYeSgmTp?usp=sharing',  // 샘플 영상이 담긴 Drive 폴더 (새 탭)
-  survey: 'https://숏.한국/동북중만족도/'  // 4교시 마지막 만족도 조사 ('#'로 바꾸면 회색 버튼)
+  survey: 'https://숏.한국/동북중만족도/',  // 4교시 마지막 만족도 조사 ('#'로 바꾸면 회색 버튼)
+  more: 'more.html'  // 도움 창 [추가 자료] → '추가로 해 보기' 페이지 (index.html과 같은 폴더에 두기)
 };
 const memoryStore = {};
 const S = {
